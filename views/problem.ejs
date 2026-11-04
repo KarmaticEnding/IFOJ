@@ -8,6 +8,9 @@ if (contest) {
 }
 const isVJudge = problem.type.startsWith("vjudge:");
 if (isVJudge) testcases = [];
+const problemPageUrl = contest
+  ? syzoj.utils.makeUrl(['contest', contest.id, 'problem', pid])
+  : syzoj.utils.makeUrl(['problem', problem.id]);
 %>
 <% include header %>
 <style>
@@ -18,6 +21,46 @@ if (isVJudge) testcases = [];
 
 #languages-menu .item::after, #testcase-menu .item::after {
     display: none;
+}
+
+.ui.segment.problem-statement {
+    padding: 16px;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.problem-statement h2 {
+    margin: 1em 0 0.55em;
+    font-family: inherit;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.problem-statement p {
+    margin: 0 0 0.8em;
+}
+
+.problem-statement > h2:first-child {
+    margin-top: 0;
+}
+
+.problem-statement > :last-child {
+    margin-bottom: 0;
+}
+
+.problem-toolbar {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.problem-secondary-actions {
+    margin-left: auto !important;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 </style>
 
@@ -39,6 +82,7 @@ if (isVJudge) testcases = [];
           <span class="ui label">时间限制：<%= problem.time_limit %> ms</span>
           <% if (problem.type === 'interaction') { %>
             <span class="ui label">题目类型：交互</span>
+            <span class="ui label" id="problem-name">题目名称：<%= projectName || '未配置' %></span>
           <% } else if (problem.file_io) { %>
             <span class="ui label">输入文件：<%= problem.file_io_input_name %></span>
             <span class="ui label">输出文件：<%= problem.file_io_output_name %></span>
@@ -58,32 +102,13 @@ if (isVJudge) testcases = [];
             }[problem.type]
           %></span>
           <span class="ui label">评测方式：<%= isVJudge ? "VJudge" : (testcases && !testcases.error) ? (testcases.spj ? 'Special Judge' : '文本比较') : '无测试数据' %></span>
+          <span class="ui label" id="problem-name">题目名称：<%= projectName || '未配置' %></span>
       </div>
-    <% } %>
-    <% if (!contest) { %>
-        <div class="row" style="margin-top: -23px">
-            <span class="ui label">上传者：
-            <% if (problem.is_anonymous && !problem.allowedManage) { %>
-              匿名
-            <% } else { %>
-              <a href="<%= syzoj.utils.makeUrl(['user', problem.user_id]) %>"><%= problem.user.username %></a>
-            <% } %>
-            </span>
-            <% if (problem.allowedManage) { %>
-                <span class="ui label">公开者：
-                <% if (problem.publicizer) { %>
-                  <a href="<%= syzoj.utils.makeUrl(['user', problem.publicizer_id]) %>"><%= problem.publicizer.username %></a>
-                <% } else { %>
-                  未知
-                <% } %>
-                </span>
-            <% } %>
-        </div>
     <% } %>
 </div>
 <div class="ui grid">
   <div class="row">
-    <div class="column">
+    <div class="column problem-toolbar">
       <div class="ui buttons">
         <% if (typeof contest !== 'undefined' && contest) { %>
           <% if (!contest.ended) { %>
@@ -91,33 +116,24 @@ if (isVJudge) testcases = [];
           <% } else { %>
             <a class="small ui primary button" href="<%= syzoj.utils.makeUrl(['problem', problem.id]) %>">转到题库</a>
           <% } %>
-          <a class="small ui positive button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'submissions'], { problem_id: pid }) %>">提交记录</a>
-          <% if (problem.additional_file) { %>
-            <a class="small ui teal button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, pid, 'download', 'additional_file']) %>">附加文件</a>
-          <% } %>
+          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a>
           <a href="<%= syzoj.utils.makeUrl(['contest', contest.id]) %>" class="ui orange button">返回比赛</a>
         <% } else { %>
           <% if (testcases && !testcases.error) { %>
             <a class="small ui primary button" href="#submit_code">提交</a>
           <% } %>
-          <a class="small ui positive button" href="<%= syzoj.utils.makeUrl(['submissions'], { problem_id: problem.id }) %>">提交记录</a>
-          <a class="small ui orange button" href="<%= syzoj.utils.makeUrl(['problem', problem.id, 'statistics', problem.type === 'submit-answer' ? 'shortest' : 'fastest']) %>">统计</a>
-          <% if (!isVJudge) { %>
-          <a class="small ui yellow button" href="<%= syzoj.utils.makeUrl(['problem', problem.id, 'testdata']) %>">测试数据</a>
-          <% } %>
-          <% if (problem.additional_file) { %>
-            <a class="small ui teal button" href="<%= syzoj.utils.makeUrl(['problem', problem.id, 'download', 'additional_file']) %>">附加文件</a>
-          <% } %>
-          <a class="small ui brown button" href="<%= syzoj.utils.makeUrl(['discussion', 'problem', problem.id]) %>" style="position: relative; ">
-            讨论
-            <% if (discussionCount) { %>
-              <div class="floating ui red tiny circular label" style="background-color: #8c5633 !important; top: -0.6em; "><%= discussionCount %></div>
-            <% } %>
-          </a>
+          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a>
         <% } %>
       </div>
-      <% if (!contest) { %>
-        <div class="ui buttons right floated">
+      <div class="ui buttons problem-secondary-actions">
+        <a class="small ui button" id="statement-source-link" href="<%= problemPageUrl + '/markdown/html' %>">题面源码</a>
+        <% if (contest) { %>
+          <a class="small ui positive button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'submissions'], { problem_id: pid }) %>">提交记录</a>
+        <% } else { %>
+          <a class="small ui positive button" href="<%= syzoj.utils.makeUrl(['submissions'], { problem_id: problem.id }) %>">提交记录</a>
+          <a class="small ui orange button" href="<%= syzoj.utils.makeUrl(['problem', problem.id, 'statistics', problem.type === 'submit-answer' ? 'shortest' : 'fastest']) %>">统计</a>
+        <% } %>
+        <% if (!contest) { %>
           <% if (problem.allowedEdit) { %>
             <a class="small ui button" href="<%= syzoj.utils.makeUrl(['problem', problem.id, 'edit']) %>">编辑</a>
             <% if (!isVJudge) { %>
@@ -136,7 +152,7 @@ if (isVJudge) testcases = [];
                 <p style="margin-top: 15px; ">删除题目</p>
               </div>
               <div class="content" style="text-align: center; ">
-                <p>确认删除此题目吗？提交记录、讨论以及测试数据将一并删除。<br>
+                <p>确认删除此题目吗？提交记录及测试数据将一并删除。<br>
                 删除题目导致的修改用户提交、通过数量可能会耗费一些时间。</p>
                 <b>警告：删除比赛中的题目会导致系统错乱！请确认没有比赛使用此题目。</b>
               </div>
@@ -153,48 +169,30 @@ if (isVJudge) testcases = [];
             </div>
             <div class="small ui red button" onclick="$('#modal-delete').modal('show')">删除</div>
           <% } %>
-        </div>
-      <% } %>
+        <% } %>
+      </div>
     </div>
   </div>
-  <% if (problem.description) { %>
-  <div class="row">
-    <div class="column">
-      <h4 class="ui top attached block header">题目描述</h4>
-      <div class="ui bottom attached segment font-content"><%- problem.description %></div>
-    </div>
-  </div>
-  <% } %>
-  <% if (problem.input_format) { %>
-  <div class="row">
-    <div class="column">
-        <h4 class="ui top attached block header">输入格式</h4>
-        <div class="ui bottom attached segment font-content"><%- problem.input_format %></div>
-    </div>
-  </div>
-  <% } %>
-  <% if (problem.output_format) { %>
+  <% if (problem.description || problem.input_format || problem.output_format || problem.example || problem.limit_and_hint) { %>
     <div class="row">
-        <div class="column">
-          <h4 class="ui top attached block header">输出格式</h4>
-          <div class="ui bottom attached segment font-content"><%- problem.output_format %></div>
-        </div>
-    </div>
-  <% } %>
-  <% if (problem.example) { %>
-    <div class="row">
-        <div class="column">
-          <h4 class="ui top attached block header">样例</h4>
-          <div class="ui bottom attached segment font-content"><%- problem.example %></div>
-        </div>
-    </div>
-  <% } %>
-  <% if (problem.limit_and_hint) { %>
-    <div class="row">
-        <div class="column">
-          <h4 class="ui top attached block header">数据范围与提示</h4>
-          <div class="ui bottom attached segment font-content"><%- problem.limit_and_hint %></div>
-        </div>
+      <div class="column">
+        <article class="ui segment font-content problem-statement" id="problem-statement" aria-label="题面">
+          <% if (problem.description) { %>
+            <h2>题目描述</h2>
+            <%- problem.description %>
+          <% } %>
+          <% if (problem.input_format) { %>
+            <h2>输入格式</h2>
+            <%- problem.input_format %>
+          <% } %>
+          <% if (problem.output_format) { %>
+            <h2>输出格式</h2>
+            <%- problem.output_format %>
+          <% } %>
+          <%- problem.example %>
+          <%- problem.limit_and_hint %>
+        </article>
+      </div>
     </div>
   <% } %>
   <% if (problem.tags && problem.tags.length && (typeof contest === 'undefined' || !contest)) { %>

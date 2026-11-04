@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+node_binary="$HOME/.local/share/ifoj-preview/node-v16.20.2-linux-x64/bin/node"
+if [ ! -x "$node_binary" ]; then node_binary="$(command -v node)"; fi
+exec "$node_binary" "$(dirname "$0")/create-user.js" "$@"

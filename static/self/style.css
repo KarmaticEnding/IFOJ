@@ -101,11 +101,14 @@ body > .ui.page.dimmer {
 .title.active .status_detail.status.success,
 :not(.status_detail).status.submitted,
 .title:hover .status_detail.status.submitted,
-.title.active .status_detail.status.submitted,
+.title.active .status_detail.status.submitted {
+    color: forestgreen;
+}
+
 :not(.status_detail).status.accepted,
 .title:hover .status_detail.status.accepted,
 .title.active .status_detail.status.accepted {
-    color: forestgreen;
+    color: #0000FF;
 }
 
 :not(.status_detail).status.wrong_answer,
@@ -191,49 +194,10 @@ body > .ui.page.dimmer {
     color: rgb(0, 68, 136);
 }
 
-/* score color */
-.score_0 {
-    color: red;
-}
+/* Numeric score colors are computed by the shared score-colors.js palette. */
 
-.score_1 {
-    color: #ff4b00;
-}
-
-.score_2 {
-    color: #ff6200;
-}
-
-.score_3 {
-    color: #ffa900;
-}
-
-.score_4 {
-    color: #ffd800;
-}
-
-.score_5 {
-    color: #c8ff00;
-}
-
-.score_6 {
-    color: #a5ff00;
-}
-
-.score_7 {
-    color: #52ff00;
-}
-
-.score_8 {
-    color: #41f741;
-}
-
-.score_9 {
-    color: #34d034;
-}
-
-.score_10 {
-    color: forestgreen;
+.score.accepted {
+    color: #0000FF;
 }
 
 .score {

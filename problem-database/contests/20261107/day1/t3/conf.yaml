@@ -1,0 +1,21 @@
+args: {}
+compile:
+  c: -O2 -std=c11
+  cpp: -O2 -std=c++14
+  java: ''
+  pas: -O2
+  py: ''
+data: []
+folder: problem
+memory limit: 512 MiB
+name: t3
+partial score: false
+pre: []
+samples: []
+time limit: 1.0
+title:
+  zh-cn: 题目 3（待命题）
+type: program
+users: {}
+version: 2
+file io: true

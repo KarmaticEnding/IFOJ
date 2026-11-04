@@ -3,11 +3,35 @@ let JudgeState = syzoj.model('judge_state');
 let FormattedCode = syzoj.model('formatted_code');
 let Contest = syzoj.model('contest');
 let ProblemTag = syzoj.model('problem_tag');
-let Article = syzoj.model('article');
 
 const randomstring = require('randomstring');
 const fs = require('fs-extra');
 const jwt = require('jsonwebtoken');
+const problemSource = require('../libs/problem_source');
+const relatedFiles = require('../libs/related_files');
+
+function serverOnlyTestdata(req, res) {
+  const message = '测试数据仅允许通过服务器文件管理。';
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    return res.status(403).json({ error: 'TESTDATA_SERVER_ONLY', message });
+  }
+  return res.status(403).render('error', { err: new ErrorMessage(message) });
+}
+
+// Deny before any multipart upload middleware can write temporary files.
+app.all(['/problem/:id/testdata', '/problem/:id/testdata/*'], serverOnlyTestdata);
+app.post('/problem/:id/import', serverOnlyTestdata);
+
+const uploadProblemAttachments = app.multer.fields([{ name: 'additional_file', maxCount: 1 }]);
+function acceptProblemAttachments(req, res, next) {
+  uploadProblemAttachments(req, res, err => {
+    if (err && err.code === 'LIMIT_UNEXPECTED_FILE' && err.field === 'testdata') {
+      return serverOnlyTestdata(req, res);
+    }
+    if (err) return next(err);
+    return next();
+  });
+}
 
 let Judger = syzoj.lib('judger');
 let CodeFormatter = syzoj.lib('code_formatter');
@@ -193,7 +217,7 @@ app.get('/problems/tag/:tagIDs', async (req, res) => {
   }
 });
 
-app.get('/problem/:id', async (req, res) => {
+app.get(['/problem/:id', '/problem/:id/markdown/html', '/problem/:id/download/related'], async (req, res) => {
   try {
     let id = parseInt(req.params.id);
     let problem = await Problem.findById(id);
@@ -205,6 +229,16 @@ app.get('/problem/:id', async (req, res) => {
 
     problem.allowedEdit = await problem.isAllowedEditBy(res.locals.user);
     problem.allowedManage = await problem.isAllowedManageBy(res.locals.user);
+
+    if (req.path.endsWith('/download/related')) return await relatedFiles.download(problem, res);
+
+    if (req.path.endsWith('/markdown/html')) {
+      return res.render('problem_markdown', {
+        problem,
+        markdownSource: problemSource.getMarkdown(problem),
+        backUrl: syzoj.utils.makeUrl(['problem', problem.id])
+      });
+    }
 
     if (problem.is_public || problem.allowedEdit) {
       await syzoj.utils.markdown(problem, ['description', 'input_format', 'output_format', 'example', 'limit_and_hint']);
@@ -219,18 +253,19 @@ app.get('/problem/:id', async (req, res) => {
 
     let testcases = await syzoj.utils.parseTestdata(problem.getTestdataPath(), problem.type === 'submit-answer');
 
-    let discussionCount = await Article.count({ problem_id: id });
-
     res.render('problem', {
       problem: problem,
+      projectName: await problemSource.getName(problem.id),
       state: state,
       lastLanguage: res.locals.user ? await res.locals.user.getLastSubmitLanguage() : null,
       testcases: testcases,
-      discussionCount: discussionCount,
       languages: problem.getVJudgeLanguages()
     });
   } catch (e) {
     syzoj.log(e);
+    if (req.path.endsWith('/markdown/html') || req.path.endsWith('/download/related')) {
+      res.status(e instanceof ErrorMessage ? (e.message === '无此题目。' ? 404 : 403) : 500);
+    }
     res.render('error', {
       err: e
     });
@@ -505,11 +540,8 @@ app.get('/problem/:id/manage', async (req, res) => {
 
     await problem.loadRelationships();
 
-    let testcases = await syzoj.utils.parseTestdata(problem.getTestdataPath(), problem.type === 'submit-answer');
-
     res.render('problem_manage', {
-      problem: problem,
-      testcases: testcases
+      problem: problem
     });
   } catch (e) {
     syzoj.log(e);
@@ -519,7 +551,7 @@ app.get('/problem/:id/manage', async (req, res) => {
   }
 });
 
-app.post('/problem/:id/manage', app.multer.fields([{ name: 'testdata', maxCount: 1 }, { name: 'additional_file', maxCount: 1 }]), async (req, res) => {
+app.post('/problem/:id/manage', acceptProblemAttachments, async (req, res) => {
   try {
     let id = parseInt(req.params.id);
     let problem = await Problem.findById(id);
@@ -546,10 +578,6 @@ app.post('/problem/:id/manage', app.multer.fields([{ name: 'testdata', maxCount:
 
     let validateMsg = await problem.validate();
     if (validateMsg) throw new ErrorMessage('无效的题目数据配置。', null, validateMsg);
-
-    if (req.files['testdata']) {
-      await problem.updateTestdata(req.files['testdata'][0].path, await res.locals.user.hasPrivilege('manage_problem'));
-    }
 
     if (req.files['additional_file']) {
       await problem.updateFile(req.files['additional_file'][0].path, 'additional_file', await res.locals.user.hasPrivilege('manage_problem'));

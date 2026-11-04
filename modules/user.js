@@ -3,6 +3,7 @@ const RatingCalculation = syzoj.model('rating_calculation');
 const RatingHistory = syzoj.model('rating_history');
 const Contest = syzoj.model('contest');
 const ContestPlayer = syzoj.model('contest_player');
+const requireRegistration = require('../libs/registration');
 
 // Ranklist
 app.get('/ranklist', async (req, res) => {
@@ -55,7 +56,7 @@ app.get('/login', async (req, res) => {
 });
 
 // Sign up
-app.get('/sign_up', async (req, res) => {
+app.get('/sign_up', requireRegistration, async (req, res) => {
   if (res.locals.user) {
     res.render('error', {
       err: new ErrorMessage('您已经登录了，请先注销。', { '注销': syzoj.utils.makeUrl(['logout'], { 'url': req.originalUrl }) })
@@ -79,7 +80,6 @@ app.get('/user/:id', async (req, res) => {
     let user = await User.findById(id);
     if (!user) throw new ErrorMessage('无此用户。');
     user.ac_problems = await user.getACProblems();
-    user.articles = await user.getArticles();
     user.allowedEdit = await user.isAllowedEditBy(res.locals.user);
 
     let statistics = await user.getStatistics();
@@ -173,7 +173,6 @@ app.post('/user/:id/edit', async (req, res) => {
     if (res.locals.user && await res.locals.user.hasPrivilege('manage_user')) {
       if (!syzoj.utils.isValidUsername(req.body.username)) throw new ErrorMessage('无效的用户名。');
       user.username = req.body.username;
-      user.email = req.body.email;
     }
 
     if (res.locals.user && res.locals.user.is_admin) {
@@ -189,7 +188,6 @@ app.post('/user/:id/edit', async (req, res) => {
 
     user.information = req.body.information;
     user.sex = req.body.sex;
-    user.public_email = (req.body.public_email === 'on');
     user.prefer_formatted_code = (req.body.prefer_formatted_code === 'on');
 
     await user.save();

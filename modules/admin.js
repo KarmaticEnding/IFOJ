@@ -1,7 +1,6 @@
 const objectPath = require('object-path');
 let Problem = syzoj.model('problem');
 let JudgeState = syzoj.model('judge_state');
-let Article = syzoj.model('article');
 let Contest = syzoj.model('contest');
 let User = syzoj.model('user');
 let UserPrivilege = syzoj.model('user_privilege');
@@ -19,7 +18,6 @@ app.get('/admin/info', async (req, res) => {
       submit_time: TypeORM.MoreThanOrEqual(syzoj.utils.getCurrentDate(true))
     });
     let problemsCount = await Problem.count();
-    let articlesCount = await Article.count();
     let contestsCount = await Contest.count();
     let usersCount = await User.count();
 
@@ -27,7 +25,6 @@ app.get('/admin/info', async (req, res) => {
       allSubmissionsCount: allSubmissionsCount,
       todaySubmissionsCount: todaySubmissionsCount,
       problemsCount: problemsCount,
-      articlesCount: articlesCount,
       contestsCount: contestsCount,
       usersCount: usersCount
     });
@@ -59,8 +56,6 @@ let configItems = {
   'page.judge_state': { name: '提交记录', type: Number },
   'page.problem_statistics': { name: '题目统计', type: Number },
   'page.ranklist': { name: '排行榜', type: Number },
-  'page.discussion': { name: '讨论', type: Number },
-  'page.article_comment': { name: '评论', type: Number },
   'page.contest': { name: '比赛', type: Number }
 };
 
@@ -297,16 +292,12 @@ app.get('/admin/rejudge', async (req, res) => {
 app.post('/admin/other', async (req, res) => {
   try {
     if (!res.locals.user || !res.locals.user.is_admin) throw new ErrorMessage('您没有权限进行此操作。');
+    if (req.body.type === 'reset_discussion') return res.status(404).json({ error: 'NOT_FOUND' });
 
     if (req.body.type === 'reset_count') {
       const problems = await Problem.find();
       for (const p of problems) {
         await p.resetSubmissionCount();
-      }
-    } else if (req.body.type === 'reset_discussion') {
-      const articles = await Article.find();
-      for (const a of articles) {
-        await a.resetReplyCountAndTime();
       }
     } else if (req.body.type === 'reset_codelen') {
       const submissions = await JudgeState.find();

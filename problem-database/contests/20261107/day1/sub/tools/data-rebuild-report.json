@@ -1,0 +1,14 @@
+{
+  "replaced_at": "2026-11-04T21:52:56+0800",
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261107/.backups/sub-data-before-random-20261104-215256",
+  "formal_cases_replaced": 20,
+  "large_samples_replaced": 8,
+  "inline_samples_preserved": 3,
+  "exact_tier_upper_bounds": true,
+  "standard_source_unchanged": true,
+  "time_limit": 2.5,
+  "tuack_score": 100,
+  "max_formal_seconds": 2.07,
+  "max_sample_seconds": 2.08,
+  "policy": "independent random operations and endpoints at exact tier bounds"
+}

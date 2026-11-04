@@ -3,6 +3,7 @@ let Problem = syzoj.model('problem');
 let File = syzoj.model('file');
 const Email = require('../libs/email');
 const jwt = require('jsonwebtoken');
+const requireRegistration = require('../libs/registration');
 
 function setLoginCookie(username, password, res) {
   res.cookie('login', JSON.stringify([username, password]), { maxAge: 10 * 365 * 24 * 60 * 60 * 1000 });
@@ -64,7 +65,7 @@ app.post('/api/forget', async (req, res) => {
 });
 
 // Sign up
-app.post('/api/sign_up', async (req, res) => {
+app.post('/api/sign_up', requireRegistration, async (req, res) => {
   try {
     res.setHeader('Content-Type', 'application/json');
     let user = await User.fromName(req.body.username);
@@ -173,7 +174,7 @@ app.post('/api/reset_password', async (req, res) => {
   }
 });
 
-app.get('/api/sign_up_confirm', async (req, res) => {
+app.get('/api/sign_up_confirm', requireRegistration, async (req, res) => {
   try {
     let obj;
     try {
@@ -217,7 +218,7 @@ app.get('/api/sign_up_confirm', async (req, res) => {
 });
 
 // Obslete!!!
-app.get('/api/sign_up/:token', async (req, res) => {
+app.get('/api/sign_up/:token', requireRegistration, async (req, res) => {
   try {
     let obj;
     try {

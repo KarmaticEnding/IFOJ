@@ -138,6 +138,7 @@ global.syzoj = {
 
     // This should before load api_v2, to init the `res.locals.user`
     this.loadHooks();
+    app.use(require('./libs/require_site_login'));
     // Trick to bypass CSRF for APIv2
     app.use((() => {
       let router = new Express.Router();

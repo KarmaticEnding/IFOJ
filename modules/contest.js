@@ -6,6 +6,8 @@ let JudgeState = syzoj.model('judge_state');
 let User = syzoj.model('user');
 
 const jwt = require('jsonwebtoken');
+const problemSource = require('../libs/problem_source');
+const relatedFiles = require('../libs/related_files');
 const { getSubmissionInfo, getRoughResult, processOverallResult } = require('../libs/submissions_process');
 
 app.get('/contests', async (req, res) => {
@@ -490,7 +492,7 @@ app.get('/contest/submission/:id', async (req, res) => {
   }
 });
 
-app.get('/contest/:id/problem/:pid', async (req, res) => {
+app.get(['/contest/:id/problem/:pid', '/contest/:id/problem/:pid/markdown/html', '/contest/:id/problem/:pid/download/related'], async (req, res) => {
   try {
     let contest_id = parseInt(req.params.id);
     let contest = await Contest.findById(contest_id);
@@ -514,6 +516,16 @@ app.get('/contest/:id/problem/:pid', async (req, res) => {
       throw new ErrorMessage('比赛尚未开始。');
     }
 
+    if (req.path.endsWith('/download/related')) return await relatedFiles.download(problem, res);
+
+    if (req.path.endsWith('/markdown/html')) {
+      return res.render('problem_markdown', {
+        problem,
+        markdownSource: problemSource.getMarkdown(problem),
+        backUrl: syzoj.utils.makeUrl(['contest', contest.id, 'problem', pid])
+      });
+    }
+
     problem.specialJudge = await problem.hasSpecialJudge();
 
     await syzoj.utils.markdown(problem, ['description', 'input_format', 'output_format', 'example', 'limit_and_hint']);
@@ -530,10 +542,14 @@ app.get('/contest/:id/problem/:pid', async (req, res) => {
       state: state,
       lastLanguage: res.locals.user ? await res.locals.user.getLastSubmitLanguage() : null,
       testcases: testcases,
+      projectName: await problemSource.getName(problem.id),
       languages: problem.getVJudgeLanguages()
     });
   } catch (e) {
     syzoj.log(e);
+    if (req.path.endsWith('/markdown/html') || req.path.endsWith('/download/related')) {
+      res.status(e instanceof ErrorMessage ? (['无此题目。', '无此比赛。'].includes(e.message) ? 404 : 403) : 500);
+    }
     res.render('error', {
       err: e
     });

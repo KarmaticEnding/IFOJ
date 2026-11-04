@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
       order: { public_time: 'DESC' }
     })).map(article => ({
       title: article.title,
-      url: syzoj.utils.makeUrl(['article', article.id]),
+      url: syzoj.utils.makeUrl(['notice', article.id]),
       date: syzoj.utils.formatDate(article.public_time, 'L')
     }));
 
@@ -54,6 +54,29 @@ app.get('/', async (req, res) => {
     res.render('error', {
       err: e
     });
+  }
+});
+
+// Announcements remain read-only and have no discussion or comment controls.
+app.get('/notice/:id', async (req, res) => {
+  try {
+    const notice = await Article.findById(parseInt(req.params.id));
+    if (!notice || !notice.is_notice) {
+      return res.status(404).render('error', { err: new ErrorMessage('无此公告。') });
+    }
+    if (notice.problem_id) {
+      const problem = await Problem.findById(notice.problem_id);
+      if (!problem || !await problem.isAllowedUseBy(res.locals.user)) {
+        return res.status(403).render('error', { err: new ErrorMessage('您没有权限进行此操作。') });
+      }
+    }
+    res.render('notice', {
+      notice,
+      content: await syzoj.utils.markdown(notice.content)
+    });
+  } catch (err) {
+    syzoj.log(err);
+    res.status(500).render('error', { err });
   }
 });
 

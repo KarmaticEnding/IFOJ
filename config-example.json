@@ -15,6 +15,7 @@
     "width": null,
     "height": null
   },
+  "allow_registration": false,
   "register_mail": false,
   "email": {
     "method": "aliyundm",
@@ -61,8 +62,6 @@
     "judge_state": 10,
     "ranklist_index": 20,
     "ranklist": 50,
-    "discussion": 10,
-    "article_comment": 10,
     "contest": 10,
     "edit_contest_problem_list": 10,
     "edit_problem_tag_list": 10
@@ -70,6 +69,7 @@
   "enabled_languages": [
     "cpp",
     "cpp11",
+    "cpp14",
     "cpp17",
     "cpp-noilinux",
     "cpp11-noilinux",
@@ -89,6 +89,7 @@
   "filter_enabled_languages": [
     "cpp",
     "cpp11",
+    "cpp14",
     "cpp17",
     "cpp-noilinux",
     "cpp11-noilinux",

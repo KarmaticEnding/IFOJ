@@ -1,0 +1,9 @@
+{
+  "verified_at": "2026-11-04T21:09:29+0800",
+  "standard_sha256": "b461e8bf1a6d3debadabb00c269b225275aaf7afa05170b5b345fcc4364075af",
+  "reference_sha256": "9ed40059a7e0f219b9dee48637e572a1750a6ef3ba47151e1be1e95fe25a106c",
+  "brute_force_cases": 1062,
+  "sanitizer_cases": 142,
+  "file_io_checked": true,
+  "elapsed_seconds": 11.792
+}

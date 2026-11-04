@@ -1,0 +1,12 @@
+{
+  "deployed_at": "2026-11-04T21:22:09+0800",
+  "path": "/home/administrator/IFOJ/problem-database/contests/20261107/day1/sub",
+  "original_backup": "/home/administrator/IFOJ/problem-database/contests/20261107/.backups/t2-before-sub-20261104-212209",
+  "tuack_score": 100,
+  "official_cases": 20,
+  "sample_cases": 11,
+  "all_input_answer_hashes_checked": true,
+  "brute_cases": 1062,
+  "sanitizer_cases": 142,
+  "pdf_visual_review": "passed"
+}

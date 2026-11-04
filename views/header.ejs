@@ -8,7 +8,8 @@
     <title><%= title %> - <%= syzoj.config.title %></title>
     <link href="<%- lib('semantic-ui/2.4.1/semantic.min.css') %>" rel="stylesheet">
     <link href="<%- selfLib('syntect-tomorrow.css') %>?20220512" rel="stylesheet">
-    <link href="<%- selfLib('style.css') %>?20181212" rel="stylesheet">
+    <link href="<%- selfLib('style.css') %>?ifoj-score-bands-1" rel="stylesheet">
+    <script src="<%- syzoj.utils.makeUrl(['self', 'score-colors.js']) %>?v=1"></script>
     <link href="<%- lib('morris.js/0.5.1/morris.css') %>" rel="stylesheet">
     <% if (useLocalLibs || !syzoj.config.google_fonts || !['like-google-fonts', 'like-local', 'built-in'].includes(syzoj.config.google_fonts.type)) { %>
       <link href="<%- syzoj.utils.makeUrl(['google-fonts', 'fira-mono.css']) %>" rel="stylesheet">
@@ -62,7 +63,6 @@
             <a class="item<% if (active.startsWith('contest')) { %> active<% } %>" href="/contests"><i class="calendar icon"></i> 比赛</a>
             <a class="item<% if (active.startsWith('submission')) { %> active<% } %>" href="/submissions"><i class="tasks icon"></i> 评测</a>
             <a class="item<% if (active.startsWith('ranklist')) { %> active<% } %>" href="/ranklist"><i class="signal icon"></i> 排名</a>
-            <a class="item<% if (active.startsWith('discussion') || active.startsWith('article')) { %> active<% } %>" href="/discussion/global"><i class="comments icon"></i> 讨论</a>
             <a class="item<% if (active.startsWith('help')) { %> active<% } %>" href="/help"><i class="help circle icon"></i> 帮助</a>
             <% if (typeof contest !== 'undefined' && contest && contest.id) { %>
               <a id="back_to_contest" class="item" href="<%= syzoj.utils.makeUrl(['contest', contest.id]) %>"><i class="arrow left icon"></i> 返回比赛</a>
@@ -106,9 +106,11 @@
                     <a class="ui button" style="margin-right: 0.5em; " href="<%= syzoj.utils.makeUrl(['login'], { url: req.query['url'] || req.originalUrl }) %>">
                         登录
                     </a>
+                    <% if (syzoj.config.allow_registration === true) { %>
                     <a class="ui primary button" href="<%= syzoj.utils.makeUrl(['sign_up'], { url: req.query['url'] || req.originalUrl }) %>">
                         注册
                     </a>
+                    <% } %>
                 </div>
                 <% } %>
             </div>

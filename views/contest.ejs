@@ -82,7 +82,7 @@
                     </span>
                   <% } else if (typeof problem.status === 'object') { %>
                     <% if (problem.status.accepted) { %>
-                      <span class="score score_10">
+                      <span class="score status accepted">
                         <% if (problem.status.unacceptedCount === 0) { %>
                           +
                         <% } else { %>
@@ -90,7 +90,7 @@
                         <% } %>
                       </span>
                     <% } else { %>
-                      <span class="score score_0">
+                      <span class="score" style="color: <%= this.scoreColor(0) %>">
                         <% if (problem.status.unacceptedCount !== 0) { %>
                           -<%= problem.status.unacceptedCount %>
                         <% } %>

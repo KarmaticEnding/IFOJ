@@ -1,0 +1,8 @@
+<% this.title = notice.title + ' - 公告'; %>
+<% include header %>
+<div class="padding">
+  <h1 class="ui header"><%= notice.title %></h1>
+  <p><%= syzoj.utils.formatDate(notice.public_time) %></p>
+  <div class="ui segment font-content"><%- content %></div>
+</div>
+<% include footer %>

@@ -15,19 +15,7 @@ let types = {
 <script src="<%- lib('morris.js/0.5.1/morris.min.js') %>"></script>
 <script>
 function getColorOfScore(score) {
-  var color = [];
-  color[0] = 'red';
-  color[1] = '#ff4b00';
-  color[2] = '#ff6200';
-  color[3] = '#ffa900';
-  color[4] = '#ffd800';
-  color[5] = '#c8ff00';
-  color[6] = '#a5ff00';
-  color[7] = '#52ff00';
-  color[8] = '#41f741';
-  color[9] = '#34d034';
-  color[10] = 'forestgreen';
-  return color[parseInt(score / 10)];
+  return IFOJScoreColors.color(score);
 }
 </script>
 <div class="padding">
@@ -81,7 +69,7 @@ function getColorOfScore(score) {
                   </span>
                   </b>
               </a></td>
-              <td><a href="<%= syzoj.utils.makeUrl(['submission', judge.id]) %>"><span class="score score_<%= parseInt(judge.score / 10) || 0 %>"><%= judge.score %></span></a></td>
+              <td><a href="<%= syzoj.utils.makeUrl(['submission', judge.id]) %>"><span class="score" style="color: <%= this.scoreColor(judge.score) %>"><%= judge.score %></span></a></td>
               <% if (problem.type !== 'submit-answer') { %>
                 <td><%= judge.total_time %> ms</td>
                 <td><%= parseInt(judge.max_memory) || 0 %> K</td>
