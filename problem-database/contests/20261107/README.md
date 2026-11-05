@@ -1,11 +1,11 @@
 # 20261107 CSP-S 模拟赛
 
-T1 向量（vector）与 T2 子区间（sub）已完成；T3、T4 仍为骨架，整场比赛尚不能直接发布。
+T1 vector, T2 sub, T3 letter and T4 mex are complete.
 
 ## 工程结构
 
 使用本机 tuack 0.1.5.4.7 官方生成器建立，conf.yaml 为 tuack version 2。
-比赛根目录 → day1 比赛日 → vector、sub、t3、t4 四道传统题。
+比赛根目录 → day1 比赛日 → vector、sub、letter、mex 四道传统题。
 
 每题目录：
 - statement/zh-cn.md：tuack Jinja2 中文题面
@@ -57,3 +57,19 @@ T2 已重造全部正式数据和八档大样例，均为所属档位满规模�
 
 T1 向量（vector）已完成，位于 day1/vector。标准程序 GPT/vector.cpp，时限 1 秒、内存 256 MiB；20 个测试点每点 5 分，四档为 10/20/30/40 分。正式 SPJ 位于 data/chk/chk.cpp，下发的独立 SPJ 位于 down/checker.cpp，原版 testlib 来源与哈希已记录。down/visualizer.html 支持离线播放和点击生成路线。
 T1 原始文件及修改前的比赛配置备份：.backups/t1-before-vector-20261105-162724。
+
+
+## T4 mex completed
+
+CF1608F; GPT/mex.cpp; 4.0 s, 256 MiB; 25 independent cases, 4 points each.
+Subtask scores: 8/12/16/8/16/16/24. Three inline samples and seven downloadable large samples.
+Validation, independent answer checks, tuack 100-point result and statement PDF are in day1/mex.
+This entry supersedes older T4 placeholder descriptions above. Backup: .backups/t4-before-mex-20261105-222003
+
+
+## T3 letter completed
+
+CF1327G; GPT/letter.cpp; 4.0 s, 256 MiB. Twenty independent cases, five points each; seven tiers: 10/10/15/15/10/20/20.
+Three inline samples and seven full-size downloadable examples. Statement tables omit score columns; only file examples state their applicable test points.
+All 30 answers checked independently, tuack score 100. Verification records and rendered PDF are under day1/letter.
+All four problems are now implemented. This entry supersedes older placeholder descriptions above. Backup: .backups/t3-before-letter-20261105-234436

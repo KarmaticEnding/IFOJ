@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261107/.backups/t4-before-mex-20261105-222003",
+  "official_cases": 25,
+  "samples": 10,
+  "score": 100,
+  "max_official_seconds": 0.86,
+  "max_sample_seconds": 1.31,
+  "time_limit": 4.0,
+  "memory_mib": 256
+}

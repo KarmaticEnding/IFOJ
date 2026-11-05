@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "cases": 177,
+  "brute_cases": 140,
+  "direct_character_dp": 170,
+  "sanitized": 30,
+  "file_io": true,
+  "std_sha256": "a7b2ab0b3b0ffcc424854f26080aa79ea8d31076b0579f0c2e95d7a142c1857c",
+  "oracle_sha256": "16e09041fd6f38127a8215a10b122e0b0114fd393f7b7bb86b7ccb657f8619dd"
+}

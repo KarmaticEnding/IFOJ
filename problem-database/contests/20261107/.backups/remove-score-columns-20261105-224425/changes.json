@@ -1,0 +1,13 @@
+{
+  "tables": [
+    "day1/mex/tables/data.json",
+    "day1/sub/tables/data.json",
+    "day1/vector/tables/data.json"
+  ],
+  "config_hashes": {
+    "day1/t3/conf.yaml": "d6d7e0d53f0b5dd56220f6e7c77061e58571d6de4192fafaa814764cdc7cedea",
+    "day1/sub/conf.yaml": "690924970b6858de4f49804a7534e609626943814f6241f055d47f84ce023242",
+    "day1/mex/conf.yaml": "2495793df2f412e7e46185090ff26c622a49384a9284580bedab911f936adcb2",
+    "day1/vector/conf.yaml": "51cf0e1db564334e87551d26fb443eb9a587cdee9ccfcce59f0857eed30362f1"
+  }
+}

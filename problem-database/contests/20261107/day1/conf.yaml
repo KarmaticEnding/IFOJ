@@ -5,8 +5,8 @@ start time: 2026-11-07 08:30:00+0800
 subdir:
 - vector
 - sub
-- t3
-- t4
+- letter
+- mex
 title:
   zh-cn: CSP-S 模拟赛
 version: 2

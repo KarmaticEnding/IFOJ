@@ -1,0 +1,79 @@
+version: 2
+folder: problem
+name: mex
+title:
+  zh-cn: MEX 计数
+type: program
+time limit: 4.0
+memory limit: 256 MiB
+file io: true
+partial score: false
+compile:
+  cpp: -O2 -std=c++14
+args:
+  n: 2000
+  k: 50
+  mod: 998244353
+pre: []
+users:
+  GPT:
+    std:
+      path: GPT/mex.cpp
+      expected: == 100
+  zjh:
+    std:
+      path: zjh/mex.cpp
+      expected: == 100
+samples:
+- cases: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+data:
+- cases: [1]
+  args: {n: 6, k: 6}
+- cases: [2]
+  args: {n: 6, k: 6}
+- cases: [3]
+  args: {n: 18, k: 18}
+- cases: [4]
+  args: {n: 18, k: 18}
+- cases: [5]
+  args: {n: 18, k: 18}
+- cases: [6]
+  args: {n: 100, k: 50}
+- cases: [7]
+  args: {n: 100, k: 50}
+- cases: [8]
+  args: {n: 100, k: 50}
+- cases: [9]
+  args: {n: 100, k: 50}
+- cases: [10]
+  args: {n: 500, k: 50}
+- cases: [11]
+  args: {n: 500, k: 50}
+- cases: [12]
+  args: {n: 2000, k: 0}
+- cases: [13]
+  args: {n: 2000, k: 0}
+- cases: [14]
+  args: {n: 2000, k: 0}
+- cases: [15]
+  args: {n: 2000, k: 0}
+- cases: [16]
+  args: {n: 2000, k: 3}
+- cases: [17]
+  args: {n: 2000, k: 3}
+- cases: [18]
+  args: {n: 2000, k: 3}
+- cases: [19]
+  args: {n: 2000, k: 3}
+- cases: [20]
+  args: {n: 2000, k: 50}
+- cases: [21]
+  args: {n: 2000, k: 50}
+- cases: [22]
+  args: {n: 2000, k: 50}
+- cases: [23]
+  args: {n: 2000, k: 50}
+- cases: [24]
+  args: {n: 2000, k: 50}
+- cases: [25]
+  args: {n: 2000, k: 50}

@@ -1,0 +1,62 @@
+version: 2
+folder: problem
+name: letter
+title:
+  zh-cn: 字母与问号
+type: program
+time limit: 4.0
+memory limit: 256 MiB
+file io: true
+partial score: false
+compile:
+  cpp: -O2 -std=c++14
+args: {}
+pre: []
+samples:
+- cases: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+users:
+  GPT:
+    std:
+      path: GPT/letter.cpp
+      expected: == 100
+data:
+- cases: [1]
+  args: {n: 100, L: 100, q: 3}
+- cases: [2]
+  args: {n: 100, L: 100, q: 3}
+- cases: [3]
+  args: {n: 400000, L: 1000, q: 0}
+- cases: [4]
+  args: {n: 400000, L: 1000, q: 0}
+- cases: [5]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [6]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [7]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [8]
+  args: {n: 100, L: 100, q: 14}
+- cases: [9]
+  args: {n: 100, L: 100, q: 14}
+- cases: [10]
+  args: {n: 100, L: 100, q: 14}
+- cases: [11]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [12]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [13]
+  args: {n: 400000, L: 1000, q: 6}
+- cases: [14]
+  args: {n: 400000, L: 1000, q: 6}
+- cases: [15]
+  args: {n: 400000, L: 1000, q: 6}
+- cases: [16]
+  args: {n: 400000, L: 1000, q: 6}
+- cases: [17]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [18]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [19]
+  args: {n: 400000, L: 1000, q: 14}
+- cases: [20]
+  args: {n: 400000, L: 1000, q: 14}

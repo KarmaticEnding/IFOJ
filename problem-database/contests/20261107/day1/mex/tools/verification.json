@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "comparison_cases": 1247,
+  "official_examples": 5,
+  "sanitized": 40,
+  "file_io": true,
+  "std_sha256": "1329b060e9c2c27db659d4ac396d3c8a48a98a21b3ae189319ff92fced0d6483",
+  "oracle_sha256": "8ccea20378e8af13338a2042776a55c0bc3ce74e89b7342a3225995eb6b3744d"
+}

@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "official_cases": 20,
+  "samples": 10,
+  "score": 100,
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261107/.backups/t3-before-letter-20261105-234436",
+  "max_official_seconds": 0.75,
+  "max_sample_seconds": 0.72,
+  "time_limit": 4,
+  "memory_mib": 256
+}
