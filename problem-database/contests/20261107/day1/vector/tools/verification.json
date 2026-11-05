@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-11-05T16:06:26+0800",
+  "grid_cases": 725,
+  "checker_cases": 153,
+  "sanitizer_cases": 40,
+  "file_io_checked": true,
+  "testlib_sha256": "743822d8120213a3482f4a6e8b9846219b84218350be548a42bdfdb056fba9e3",
+  "source_hashes": {
+    "GPT/vector.cpp": "be9ec462ad9d745a55b3c7af38f9df1aa32fce22286b6f4e697fd46bdc778b41",
+    "down/checker.cpp": "2138774cb6937521a61de2bd519fc82a2569b1751b52a685751ba12d9076d8d5",
+    "data/chk/chk.cpp": "bff6dfa30377e039dec55b5a4d82daf51626fb87d87037ab983c4db5b54b0201"
+  },
+  "elapsed_seconds": 48.367
+}

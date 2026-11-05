@@ -1,11 +1,11 @@
 # 20261107 CSP-S 模拟赛
 
-T2 子区间（sub）已完成；T1、T3、T4 仍为骨架，整场比赛尚不能直接发布。
+T1 向量（vector）与 T2 子区间（sub）已完成；T3、T4 仍为骨架，整场比赛尚不能直接发布。
 
 ## 工程结构
 
 使用本机 tuack 0.1.5.4.7 官方生成器建立，conf.yaml 为 tuack version 2。
-比赛根目录 → day1 比赛日 → t1、sub、t3、t4 四道传统题。
+比赛根目录 → day1 比赛日 → vector、sub、t3、t4 四道传统题。
 
 每题目录：
 - statement/zh-cn.md：tuack Jinja2 中文题面
@@ -21,11 +21,11 @@ T2 子区间（sub）已完成；T1、T3、T4 仍为骨架，整场比赛尚不�
 ## 待确认配置
 
 - 比赛时间暂设 2026-11-07 08:30–12:30（北京时间 UTC+8），仅为四小时占位；请在 day1/conf.yaml 修改。
-- T1、T3、T4 的题名和配置仍为占位；T2 已重命名为 sub，标题为“子区间”。
-- T1、T3、T4 保留模板默认时限；T2 为 2.5 秒、512 MiB、C++14 -O2。
+- T3、T4 的题名和配置仍为占位；T2 已重命名为 sub，标题为“子区间”。
+- T3、T4 保留模板默认时限；T2 为 2.5 秒、512 MiB、C++14 -O2。
 - file io: true，文件名随题目 name 为 t1.in / t1.out 等；这是 .out 提交文件名，标准答案数据仍用 .ans。
 - partial score: false 为模板默认值；如需测试点部分分或子任务，请确定计分方式后修改。
-- T1、T3、T4 的数据和程序为空；T2 有 20 个等分测试点、11 份样例，标准程序为 day1/sub/GPT/sub.cpp。
+- T3、T4 的数据和程序为空；T2 有 20 个等分测试点、11 份样例，标准程序为 day1/sub/GPT/sub.cpp。
 
 ## 常用命令
 
@@ -53,3 +53,7 @@ T2 已完成暴力对拍、双算法数据核验、tuack 正式评测与题面 P
 T2 原始文件与本次修改前的比赛配置已备份到 .backups/t2-before-sub-20261104-212209。
 
 T2 已重造全部正式数据和八档大样例，均为所属档位满规模随机数据；原数据备份：.backups/sub-data-before-random-20261104-215256。
+
+
+T1 向量（vector）已完成，位于 day1/vector。标准程序 GPT/vector.cpp，时限 1 秒、内存 256 MiB；20 个测试点每点 5 分，四档为 10/20/30/40 分。正式 SPJ 位于 data/chk/chk.cpp，下发的独立 SPJ 位于 down/checker.cpp，原版 testlib 来源与哈希已记录。down/visualizer.html 支持离线播放和点击生成路线。
+T1 原始文件及修改前的比赛配置备份：.backups/t1-before-vector-20261105-162724。

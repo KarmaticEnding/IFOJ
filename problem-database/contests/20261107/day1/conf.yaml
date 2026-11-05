@@ -3,7 +3,7 @@ folder: day
 name: day1
 start time: 2026-11-07 08:30:00+0800
 subdir:
-- t1
+- vector
 - sub
 - t3
 - t4

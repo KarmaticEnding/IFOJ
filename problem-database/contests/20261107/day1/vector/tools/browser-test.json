@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "tests": [
+    "sequence validation",
+    "opposite vectors accepted",
+    "duplicate vectors rejected",
+    "click-to-sequence",
+    "undo",
+    "playback",
+    "360px layout",
+    "million-cell virtual grid"
+  ],
+  "pageErrors": []
+}

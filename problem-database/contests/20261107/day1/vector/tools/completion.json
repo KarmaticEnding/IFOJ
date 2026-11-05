@@ -1,0 +1,20 @@
+{
+  "completed_at": "2026-11-05T16:27:24+0800",
+  "path": "/home/administrator/IFOJ/problem-database/contests/20261107/day1/vector",
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261107/.backups/t1-before-vector-20261105-162724",
+  "tuack_score": 100,
+  "official_cases": 20,
+  "inline_examples": 3,
+  "large_examples": 4,
+  "time_limit": 1.0,
+  "memory_limit": "256 MiB",
+  "grid_validation_cases": 725,
+  "checker_validation_cases": 153,
+  "sanitizer_cases": 40,
+  "testlib_commit": "125ca845718ad9e18ae8d3dfac8f0a9f09033e1e",
+  "testlib_unmodified": true,
+  "distinct_public_and_official_checkers": true,
+  "browser_tests_passed": true,
+  "pdf_visual_review": "passed",
+  "max_formal_seconds": 0.06
+}

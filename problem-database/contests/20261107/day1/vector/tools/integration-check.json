@@ -1,0 +1,12 @@
+[
+  {
+    "case": "different-valid",
+    "score": 100.0,
+    "message": "ok valid route"
+  },
+  {
+    "case": "invalid-repeat",
+    "score": 0.0,
+    "message": "wrong answer repeated displacement at jump 2"
+  }
+]
