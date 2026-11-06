@@ -1,0 +1,15 @@
+{
+  "changed": [
+    "day1/sub/tables/data.json",
+    "day1/letter/tables/data.json",
+    "day1/letter/statement/zh-cn.md",
+    "day1/mex/tables/data.json",
+    "day1/mex/statement/zh-cn.md"
+  ],
+  "config_hashes": {
+    "day1/letter/conf.yaml": "ed1db1cffa752c4ebe19e93229b047e5e1c4372efe78753c3cca83f84f7c7842",
+    "day1/sub/conf.yaml": "690924970b6858de4f49804a7534e609626943814f6241f055d47f84ce023242",
+    "day1/mex/conf.yaml": "2495793df2f412e7e46185090ff26c622a49384a9284580bedab911f936adcb2",
+    "day1/vector/conf.yaml": "51cf0e1db564334e87551d26fb443eb9a587cdee9ccfcce59f0857eed30362f1"
+  }
+}

@@ -4,7 +4,7 @@ name: letter
 title:
   zh-cn: 字母与问号
 type: program
-time limit: 4.0
+time limit: 1.0
 memory limit: 256 MiB
 file io: true
 partial score: false
@@ -18,6 +18,10 @@ users:
   GPT:
     std:
       path: GPT/letter.cpp
+      expected: == 100
+  zjh:
+    std:
+      path: zjh/letter.cpp
       expected: == 100
 data:
 - cases: [1]
