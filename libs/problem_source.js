@@ -8,9 +8,17 @@ async function getProject(id) {
   try {
     const index = await fs.readJson(path.join(database, 'problem-index.json'));
     const folder = index[String(id)];
-    if (typeof folder !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(folder)) return null;
-    const projects = await fs.realpath(path.join(database, 'problems'));
-    const directory = await fs.realpath(path.join(projects, folder));
+    let relative;
+    let allowedRoot;
+    if (typeof folder === 'string' && /^[a-zA-Z0-9_-]+$/.test(folder)) {
+      relative = path.join('problems', folder);
+      allowedRoot = 'problems';
+    } else if (folder && typeof folder.path === 'string' && /^contests\/(?:[a-zA-Z0-9_-]+\/)+[a-zA-Z0-9_-]+$/.test(folder.path)) {
+      relative = folder.path;
+      allowedRoot = 'contests';
+    } else return null;
+    const projects = await fs.realpath(path.join(database, allowedRoot));
+    const directory = await fs.realpath(path.join(database, relative));
     if (!directory.startsWith(projects + path.sep)) return null;
     const configFile = await fs.realpath(path.join(directory, 'conf.yaml'));
     if (!configFile.startsWith(directory + path.sep)) return null;

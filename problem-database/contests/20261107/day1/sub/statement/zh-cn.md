@@ -111,6 +111,6 @@
 
 对于所有测试数据，满足 $1 \le n, m \le {{ args['n'].hn() }}$，每次操作均满足 $1 \le l \le r \le n$，初始元素和修改操作中的参数满足 $1 \le a_i, x < {{ args['mod'].hn() }}$。
 
-{{ tbl('data', merge=False) }}
+{{ tbl('data') }}
 
 特殊性质 A：对于每次 `1` 操作，均有 $l = r$。

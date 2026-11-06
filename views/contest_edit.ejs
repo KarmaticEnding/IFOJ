@@ -1,15 +1,20 @@
 <% this.title = contest.id ? '编辑比赛' : '新建比赛' %>
 <% include header %>
+<style>
+.contest-option-row { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; margin: 1em 0; }
+.ui.form .contest-option-row > .field { display: flex; align-items: center; gap: 12px; margin: 0; }
+.ui.form .contest-option-row .ui.header { margin: 0; white-space: nowrap; }
+.contest-password-input.ui.action.input { display: flex; width: 100%; }
+.contest-password-input.ui.action.input > input { flex: 1; min-width: 0; }
+.contest-password-input.ui.action.input > .button { flex: 0 0 auto; white-space: nowrap; }
+</style>
+
 <div class="padding">
         <form action="<%= syzoj.utils.makeUrl(['contest', contest.id, 'edit']) %>" method="post">
           <div class="ui form">
               <div class="field">
                 <label>比赛名称</label>
                 <input type="text" name="title" value="<%= contest.title %>">
-              </div>
-              <div class="field">
-                <label>比赛描述</label>
-                <input type="text" name="subtitle" class="markdown-edit" value="<%= contest.subtitle %>">
               </div>
             <div class="field">
                 <label>试题列表</label>
@@ -64,18 +69,34 @@
                 <label>结束时间</label>
                 <input type="text" name="end_time" value="<%= syzoj.utils.formatDate(contest.end_time || syzoj.utils.getCurrentDate()) %>">
             </div>
-            <div class="inline field">
-              <label class="ui header">公开</label>
-              <div class="ui toggle checkbox">
-                <input type="checkbox"<% if (contest.is_public) { %> checked<% } %> name="is_public">
-                <label><span style="visibility: hidden; ">　</span></label>
+            <div class="contest-option-row">
+              <div class="field">
+                <label class="ui header" for="contest-is-public">公开</label>
+                <div class="ui toggle checkbox">
+                  <input id="contest-is-public" type="checkbox" name="is_public"<% if (contest.is_public) { %> checked<% } %>>
+                  <label><span style="visibility: hidden;">　</span></label>
+                </div>
+              </div>
+              <div class="field" title="比赛结束前向普通选手隐藏各题的满分、得分与提交人数统计；管理员仍可查看，赛后恢复显示。">
+                <label class="ui header" for="contest-hide-statistics">隐藏统计信息</label>
+                <div class="ui toggle checkbox">
+                  <input id="contest-hide-statistics" type="checkbox" name="hide_statistics"<% if (contest.hide_statistics) { %> checked<% } %>>
+                  <label><span style="visibility: hidden;">　</span></label>
+                </div>
+              </div>
+              <div class="field">
+                <label class="ui header" for="hide_statement">隐藏网页题面</label>
+                <div class="ui toggle checkbox">
+                  <input id="hide_statement" name="hide_statement" type="checkbox"<% if (contest.hide_statement) { %> checked<% } %>>
+                  <label><span style="visibility: hidden;">　</span></label>
+                </div>
               </div>
             </div>
-            <div class="inline field">
-              <label class="ui header">隐藏统计信息</label>
-              <div class="ui toggle checkbox">
-                <input type="checkbox"<% if (contest.hide_statistics) { %> checked<% } %> name="hide_statistics">
-                <label><span style="visibility: hidden; ">　</span></label>
+            <div class="field">
+              <label for="package_password">下发包解压密码</label>
+              <div class="ui action input contest-password-input">
+                <input id="package_password" name="package_password" type="text" maxlength="128" autocomplete="off" value="<%= contest.package_password || '' %>" placeholder="未设置">
+                <button type="button" id="generate-package-password" class="ui button">随机生成</button>
               </div>
             </div>
             <div style="text-align: center; "><button id="submit_button" type="submit" class="ui labeled icon blue button"><i class="ui edit icon"></i>提交</button></div>
@@ -115,6 +136,23 @@ $(function () {
         cache: false
       }
     });
+});
+</script>
+<script>
+function generatePackagePassword() {
+  var alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
+  var password = '';
+  while (password.length < 12) {
+    var bytes = new Uint8Array(24);
+    window.crypto.getRandomValues(bytes);
+    for (var i = 0; i < bytes.length && password.length < 12; i++) {
+      if (bytes[i] < 252) password += alphabet[bytes[i] % alphabet.length];
+    }
+  }
+  return password;
+}
+$('#generate-package-password').on('click', function () {
+  $('#package_password').val(generatePackagePassword()).trigger('input').trigger('change');
 });
 </script>
 <% include footer %>

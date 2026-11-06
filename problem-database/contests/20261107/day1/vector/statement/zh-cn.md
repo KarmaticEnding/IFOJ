@@ -76,7 +76,7 @@
 
 对于所有测试数据，满足 $n,m\ge1$，$1\le nm\le {{ args['max_cells'].hn() }}$。
 
-{{ tbl('data', merge=False) }}
+{{ tbl('data') }}
 
 {{ s('hint') }}
 

@@ -5,11 +5,34 @@
 .ui.label.pointing.below.left { margin-bottom: 0; }
 .ui.label.pointing.below.right { margin-bottom: 0; float: right; }
 #back_to_contest { display: none;  }
+/* Keep the arrow centered on the label, independent of Semantic UI's rotated origin. */
+.contest-status-tooltip[data-tooltip][data-position="bottom center"]:before {
+  width: 10px;
+  height: 10px;
+  left: 50%;
+  top: calc(100% + 9px);
+  margin: 0;
+  transform-origin: center center;
+  transform: translateX(-50%) rotate(45deg) scale(0) !important;
+}
+.contest-status-tooltip[data-tooltip][data-position="bottom center"]:hover:before {
+  transform: translateX(-50%) rotate(45deg) scale(1) !important;
+}
+.contest-status-tooltip[data-tooltip][data-position="bottom center"]:after {
+  left: 50%;
+  top: 100%;
+  margin-top: 14px;
+}
 </style>
 <% include header %>
 <div class="padding">
-  <h1><%= contest.title %></h1>
-  <div style="margin-bottom: 30px;"><%- contest.subtitle %></div>
+  <h1><%= contest.title %>
+    <span class="ui header"><div class="ui label blue contest-status-tooltip" data-tooltip="<%= contest.type === 'noi' ? '比赛期间不显示评测结果，最后一次提交计分。' : contest.type === 'ioi' ? '可查看评测结果，按本赛制规则计分。' : '按 ICPC 规则计分。' %>" data-position="bottom center"><%= {noi: 'NOIP 模式', ioi: 'IOI 模式', acm: 'ICPC 模式'}[contest.type] %></div></span>
+    <span class="ui header"><div class="ui label blue contest-status-tooltip" data-tooltip="在网页上提交代码。" data-position="bottom center">在线提交</div></span>
+    <span class="ui header"><div class="ui label blue contest-status-tooltip" data-tooltip="由 OJ 自动评测提交的代码。" data-position="bottom center">在线评测</div></span>
+    <span class="ui header"><div class="ui label blue contest-status-tooltip" data-tooltip="<%= contest.hide_statement ? '请在下发包中读题。' : '开赛后可在网页上阅读题面。' %>" data-position="bottom center"><%= contest.hide_statement ? '隐藏题面' : '显示题面' %></div></span>
+    <span class="ui header"><div class="ui label blue" id="contest-package-password">解压密码：<%= !contest.package_password ? '未设置' : (isSupervisior || syzoj.utils.getCurrentDate() >= contest.start_time) ? contest.package_password : '开赛后公布' %></div></span>
+  </h1>
   <% let unveiled = (isSupervisior || syzoj.utils.getCurrentDate() >= contest.start_time); %>
   <% const seeResult = (isSupervisior || contest.ended); %>
   <% const seeRanklist = seeResult || (contest.allowedSeeingResult() && contest.allowedSeeingOthers()); %>
@@ -34,6 +57,7 @@
             syzoj.utils.makeUrl(['submissions'], {contest: contest.id}) :
             syzoj.utils.makeUrl(['contest', contest.id, 'submissions']); %>
           <a class="ui small positive button" href="<%= submissionsUrl %>">提交记录</a>
+          <a class="ui small button pink" id="contest-download-package" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'download', 'zip']) %>" download="contest-<%= contest.id %>.zip">下载包</a>
           <% if (isSupervisior) { %>
             <a class="ui small button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'edit']) %>">编辑比赛</a>
           <% } %>

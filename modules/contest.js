@@ -21,7 +21,6 @@ app.get('/contests', async (req, res) => {
       start_time: 'DESC'
     });
 
-    await contests.forEachAsync(async x => x.subtitle = await syzoj.utils.markdown(x.subtitle));
 
     res.render('contests', {
       contests: contests,
@@ -107,7 +106,6 @@ app.post('/contest/:id/edit', async (req, res) => {
 
     if (!req.body.title.trim()) throw new ErrorMessage('比赛名不能为空。');
     contest.title = req.body.title;
-    contest.subtitle = req.body.subtitle;
     if (!Array.isArray(req.body.problems)) req.body.problems = [req.body.problems];
     if (!Array.isArray(req.body.admins)) req.body.admins = [req.body.admins];
     contest.problems = req.body.problems.join('|');
@@ -117,6 +115,11 @@ app.post('/contest/:id/edit', async (req, res) => {
     contest.end_time = syzoj.utils.parseDate(req.body.end_time);
     contest.is_public = req.body.is_public === 'on';
     contest.hide_statistics = req.body.hide_statistics === 'on';
+    contest.hide_statement = req.body.hide_statement === 'on';
+    const packagePassword = typeof req.body.package_password === 'string' ? req.body.package_password.trim() : '';
+    if (packagePassword.length > 128) throw new ErrorMessage('解压密码不能超过 128 个字符。');
+    contest.package_password = packagePassword;
+
 
     await contest.save();
 
@@ -126,6 +129,23 @@ app.post('/contest/:id/edit', async (req, res) => {
     res.render('error', {
       err: e
     });
+  }
+});
+
+app.get('/contest/:id/download/zip', async (req, res) => {
+  try {
+    const contest=await Contest.findById(parseInt(req.params.id));
+    if(!contest)return res.status(404).render('error',{err:new ErrorMessage('无此比赛。')});
+    const supervisor=await contest.isSupervisior(res.locals.user);
+    if(!contest.is_public&&!supervisor)return res.status(403).render('error',{err:new ErrorMessage('比赛未公开。')});
+    const file=await require('../libs/contest_package').prepare(contest);
+    res.set('Cache-Control','private, no-store');
+    res.set('X-Content-Type-Options','nosniff');
+    return res.download(file,'contest-'+contest.id+'.zip');
+  }catch(e){
+    syzoj.log(e);
+    res.set('Cache-Control','no-store');
+    return res.status(e instanceof ErrorMessage?400:500).render('error',{err:e instanceof ErrorMessage?e:new ErrorMessage('下发包生成失败，请联系管理员。')});
   }
 });
 
@@ -144,7 +164,6 @@ app.get('/contest/:id', async (req, res) => {
 
     contest.running = contest.isRunning();
     contest.ended = contest.isEnded();
-    contest.subtitle = await syzoj.utils.markdown(contest.subtitle);
     contest.information = await syzoj.utils.markdown(contest.information);
 
     let problems_id = await contest.getProblems();
@@ -516,6 +535,14 @@ app.get(['/contest/:id/problem/:pid', '/contest/:id/problem/:pid/markdown/html',
       throw new ErrorMessage('比赛尚未开始。');
     }
 
+    problem.hideStatement = !!contest.hide_statement && !await contest.isSupervisior(curUser);
+    if (problem.hideStatement && (req.path.endsWith('/markdown/html') || req.path.endsWith('/download/related'))) {
+      res.status(403);
+      throw new ErrorMessage('本场比赛隐藏网页题面，请在下发包中读题。');
+    }
+    if (problem.hideStatement) {
+      for (const field of ['description', 'input_format', 'output_format', 'example', 'limit_and_hint']) problem[field] = '';
+    }
     if (req.path.endsWith('/download/related')) return await relatedFiles.download(problem, res);
 
     if (req.path.endsWith('/markdown/html')) {
@@ -580,6 +607,7 @@ app.get('/contest/:id/:pid/download/additional_file', async (req, res) => {
 
     await problem.loadRelationships();
 
+    if (contest.hide_statement && !await contest.isSupervisior(res.locals.user)) throw new ErrorMessage('本场比赛隐藏网页题面，请在下发包中读题。');
     if (!problem.additional_file) throw new ErrorMessage('无附加文件。');
 
     res.download(problem.additional_file.getPath(), `additional_file_${id}_${pid}.zip`);

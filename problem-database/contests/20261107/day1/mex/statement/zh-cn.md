@@ -95,4 +95,4 @@ $b_i$ 可以为负数。第一个前缀的 MEX 必须为 $0$，最后一个前�
 
 对于所有测试数据，满足 $1\le n\le{{ tools.hn(2000) }}$，$0\le k\le50$，$-k\le b_i\le n+k$。
 
-{{ tbl('data', merge=False) }}
+{{ tbl('data') }}

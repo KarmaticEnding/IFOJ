@@ -1,3 +1,15 @@
 {
-  "1": "aplusb"
+  "1": "aplusb",
+  "4": {
+    "path": "contests/20261107/day1/vector"
+  },
+  "5": {
+    "path": "contests/20261107/day1/sub"
+  },
+  "6": {
+    "path": "contests/20261107/day1/letter"
+  },
+  "7": {
+    "path": "contests/20261107/day1/mex"
+  }
 }

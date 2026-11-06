@@ -116,17 +116,17 @@ const problemPageUrl = contest
           <% } else { %>
             <a class="small ui primary button" href="<%= syzoj.utils.makeUrl(['problem', problem.id]) %>">转到题库</a>
           <% } %>
-          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a>
+<% if (!problem.hideStatement) { %>          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a><% } %>
           <a href="<%= syzoj.utils.makeUrl(['contest', contest.id]) %>" class="ui orange button">返回比赛</a>
         <% } else { %>
           <% if (testcases && !testcases.error) { %>
             <a class="small ui primary button" href="#submit_code">提交</a>
           <% } %>
-          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a>
+<% if (!problem.hideStatement) { %>          <a class="small ui teal button" id="related-files-link" href="<%= problemPageUrl + '/download/related' %>" download="<%= problem.id %>.zip">相关文件</a><% } %>
         <% } %>
       </div>
       <div class="ui buttons problem-secondary-actions">
-        <a class="small ui button" id="statement-source-link" href="<%= problemPageUrl + '/markdown/html' %>">题面源码</a>
+<% if (!problem.hideStatement) { %>        <a class="small ui button" id="statement-source-link" href="<%= problemPageUrl + '/markdown/html' %>">题面源码</a><% } %>
         <% if (contest) { %>
           <a class="small ui positive button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'submissions'], { problem_id: pid }) %>">提交记录</a>
         <% } else { %>
@@ -173,7 +173,10 @@ const problemPageUrl = contest
       </div>
     </div>
   </div>
-  <% if (problem.description || problem.input_format || problem.output_format || problem.example || problem.limit_and_hint) { %>
+  <% if (problem.hideStatement) { %>
+    <div class="row"><div class="column"><div class="ui info message">本场比赛隐藏网页题面，请在下发包中读题。</div></div></div>
+  <% } %>
+  <% if (!problem.hideStatement && (problem.description || problem.input_format || problem.output_format || problem.example || problem.limit_and_hint)) { %>
     <div class="row">
       <div class="column">
         <article class="ui segment font-content problem-statement" id="problem-statement" aria-label="题面">
