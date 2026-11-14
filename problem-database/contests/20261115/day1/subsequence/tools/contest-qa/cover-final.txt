@@ -1,0 +1,29 @@
+        20261115 CSP-S 模拟赛
+             2026 年 11 月 15 日
+
+                    CSP-S 模拟赛
+
+                      CSP-S 模拟赛
+          时间：2026 年 11 月 15 日 08:30 ∼ 12:30
+
+题目名称        前缀乘积          子序列             跨度        经典问题
+题目类型        传统型           传统型             传统型       传统型
+目录          product       subsequence     span      classic
+可执行文件名      product       subsequence     span      classic
+输入文件名       product.in    subsequence.inspan.in     classic.in
+输出文件名       product.out   subsequence.out
+                                       span.out     classic.out
+每个测试点时限     1.0 秒         1.0 秒           1.0 秒     5.0 秒
+内存限制        256 MiB       256 MiB         512 MiB   512 MiB
+测试点数目       20            20              20        25
+测试点是否等分     是             是               是         是
+
+ 提交源程序文件名
+
+对于 C++ 语言   product.cpp   subsequence.cpp
+                                       span.cpp     classic.cpp
+
+ 编译选项
+
+对于 C++ 语言                         ‐O2 ‐std=c++14
+

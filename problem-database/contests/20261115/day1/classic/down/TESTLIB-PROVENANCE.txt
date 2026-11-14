@@ -1,0 +1,6 @@
+Project: MikeMirzayanov/testlib
+Version reported by header: 0.9.49
+Commit: 125ca845718ad9e18ae8d3dfac8f0a9f09033e1e
+Source: https://raw.githubusercontent.com/MikeMirzayanov/testlib/125ca845718ad9e18ae8d3dfac8f0a9f09033e1e/testlib.h
+SHA256: 743822d8120213a3482f4a6e8b9846219b84218350be548a42bdfdb056fba9e3
+The header is the unmodified official file. See its own license notice.

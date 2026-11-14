@@ -1,0 +1,17 @@
+args: {}
+compile:
+  cpp: -O2 -std=c++14
+data: []
+folder: problem
+memory limit: 512 MiB
+name: t4
+partial score: false
+pre: []
+samples: []
+time limit: 1.0
+title:
+  zh-cn: 题目 4（待命题）
+type: program
+users: {}
+version: 2
+file io: true

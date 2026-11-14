@@ -535,7 +535,8 @@ app.get(['/contest/:id/problem/:pid', '/contest/:id/problem/:pid/markdown/html',
       throw new ErrorMessage('比赛尚未开始。');
     }
 
-    problem.hideStatement = !!contest.hide_statement && !await contest.isSupervisior(curUser);
+    const finishedParticipant = await syzoj.lib('contest_problem_access').hasFinishedContest(contest, curUser);
+    problem.hideStatement = !!contest.hide_statement && !await contest.isSupervisior(curUser) && !finishedParticipant;
     if (problem.hideStatement && (req.path.endsWith('/markdown/html') || req.path.endsWith('/download/related'))) {
       res.status(403);
       throw new ErrorMessage('本场比赛隐藏网页题面，请在下发包中读题。');
@@ -607,7 +608,7 @@ app.get('/contest/:id/:pid/download/additional_file', async (req, res) => {
 
     await problem.loadRelationships();
 
-    if (contest.hide_statement && !await contest.isSupervisior(res.locals.user)) throw new ErrorMessage('本场比赛隐藏网页题面，请在下发包中读题。');
+    if (contest.hide_statement && !await contest.isSupervisior(res.locals.user) && !await syzoj.lib('contest_problem_access').hasFinishedContest(contest,res.locals.user)) throw new ErrorMessage('本场比赛隐藏网页题面，请在下发包中读题。');
     if (!problem.additional_file) throw new ErrorMessage('无附加文件。');
 
     res.download(problem.additional_file.getPath(), `additional_file_${id}_${pid}.zip`);

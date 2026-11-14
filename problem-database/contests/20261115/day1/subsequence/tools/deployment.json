@@ -1,0 +1,14 @@
+{
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261115/.backups/t2-before-subsequence-20261113-204302",
+  "preserved_conf_sha256": {
+    "product": "b576143ff00f3732ffe909f69513d702ca7e9865949e1bc0841a050edab1f0be",
+    "span": "5ae37c5538472c209232da320525d91ebfb523dc70f100bdc419da6b8612291a",
+    "classic": "7aa8189bcbb485c06b0f388bbdd647bb9fc2f6b3bb82482e2868dc78b2e5d63f"
+  },
+  "order": [
+    "product",
+    "subsequence",
+    "span",
+    "classic"
+  ]
+}

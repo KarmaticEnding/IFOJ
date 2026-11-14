@@ -1,0 +1,13 @@
+<% this.title=contest.title+' - 复盘表'; %>
+<% include header %>
+<h2><%= contest.title %> · 复盘表</h2>
+<div class="ui buttons" style="margin-bottom:16px;">
+ <a class="ui button" href="<%= syzoj.utils.makeUrl(['contest',contest.id]) %>">返回比赛</a>
+ <a class="ui teal button" href="<%= syzoj.utils.makeUrl(['contest',contest.id,'review_table',user.id,'edit']) %>">写复盘表</a>
+</div>
+<table class="ui small compact table"><thead><tr><th>用户</th><th>最后保存时间</th><th></th></tr></thead><tbody>
+ <% for(const entry of entries){ if(!entry.owner)continue; %><tr><td><%= entry.owner.username %></td><td><%= new Date(entry.row.saved_at).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'}) %></td><td><a href="<%= syzoj.utils.makeUrl(['contest',contest.id,'review_table',entry.owner.id]) %>">查看复盘表</a></td></tr><% } %>
+ <% if(!entries.length){ %><tr><td colspan="3">还没有人保存复盘表。</td></tr><% } %>
+</tbody></table>
+<% include page %>
+<% include footer %>

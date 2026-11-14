@@ -1,0 +1,30 @@
+[
+  {
+    "probe": 1,
+    "algorithm": "brute",
+    "status": "completed",
+    "wall": 3.170692236999912,
+    "cpu": 3.123628
+  },
+  {
+    "probe": 1,
+    "algorithm": "scan",
+    "status": "completed",
+    "wall": 0.2977191119998679,
+    "cpu": 0.2854800000000001
+  },
+  {
+    "probe": 2,
+    "algorithm": "scan",
+    "status": "timeout",
+    "wall": 8.003992267000285,
+    "cpu": 7.967600000000002
+  },
+  {
+    "probe": 2,
+    "algorithm": "brute",
+    "status": "timeout",
+    "wall": 8.006869616999666,
+    "cpu": 7.975436999999999
+  }
+]

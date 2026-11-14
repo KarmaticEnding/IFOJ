@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261115/.backups/span-before-completion-20261113-175054",
+  "score": 100,
+  "formal_cases": 20,
+  "samples": 11,
+  "time_limit": 2.5,
+  "memory_mib": 512,
+  "max_official_seconds": 1.02,
+  "max_sample_seconds": 1.07,
+  "negative_benchmark_runs": 16
+}

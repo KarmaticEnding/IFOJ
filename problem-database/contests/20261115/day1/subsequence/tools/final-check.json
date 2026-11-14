@@ -1,0 +1,24 @@
+{
+  "score": 100,
+  "formal_points": 20,
+  "points_each": 5,
+  "tier_scores": [
+    10,
+    10,
+    15,
+    10,
+    20,
+    35
+  ],
+  "inline_samples": 3,
+  "large_file_samples": 6,
+  "max_formal_seconds": 0.03,
+  "max_sample_seconds": 0.02,
+  "max_peak_kib": 3624,
+  "time_limit_seconds": 1.0,
+  "memory_limit": "256 MiB",
+  "all_input_answer_hashes_checked": true,
+  "standard_matches_pre_generation_verification": true,
+  "other_problem_configurations_unchanged": true,
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261115/.backups/t2-before-subsequence-20261113-204302"
+}

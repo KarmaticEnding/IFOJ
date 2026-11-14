@@ -1,0 +1,16 @@
+{
+  "standalone": {
+    "path": "/home/administrator/IFOJ/problem-database/contests/20261115/day1/subsequence/statements/noi/subsequence.pdf",
+    "pages": 5,
+    "sha256": "c785b609c31299450a890e41dc127f8a8b9b296b3e7a2f51716b08d2645a8492"
+  },
+  "contest": {
+    "path": "/home/administrator/IFOJ/problem-database/contests/20261115/statements/noi/day1.pdf",
+    "pages": 17,
+    "sha256": "2e53b476cbcd42fa0ef89fcb83cd466468235acdf3c6f42c76b7fba1be032686"
+  },
+  "standalone_all_pages_visually_checked": true,
+  "combined_cover_and_subsequence_pages_visually_checked": true,
+  "cover_long_filenames_fit": true,
+  "official_tuack_package_unchanged": true
+}

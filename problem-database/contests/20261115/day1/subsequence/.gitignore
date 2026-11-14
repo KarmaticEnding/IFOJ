@@ -1,0 +1,12 @@
+tools/std
+tools/oracle
+tools/brute
+tools/small_k
+tools/batch
+tools/sanitized
+tools/file-io
+tools/.timing
+__pycache__/
+*.log
+result.csv
+result/

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "graph_cases": 247,
+  "special_oracle_cases": 320,
+  "binary_random_versions": 5000,
+  "binary_comparisons": 15000,
+  "forked_long_carry_checks": 2000,
+  "sanitized_graphs": 40,
+  "spj_cases": 22,
+  "tuack_adapter": true,
+  "file_io": true,
+  "std_sha256": "ed4661eff9b05f0c1b3804b8952f5d152f9b8dae84d9a38b4dcf15554b8fbc3b",
+  "oracle_sha256": "27541c07941e7409203f653cd9efba23397e5984911e2c188a94197f69cf6e0d",
+  "official_sha256": "4173c33bee7cf7587b325b8513261e50b2b02d419d8b1f3ca22f3c38cb7bffd2",
+  "public_sha256": "945b432815519995678c50507a67c1d375995ef4ade4528f9bce4dfbf8f2da56",
+  "testlib_sha256": "743822d8120213a3482f4a6e8b9846219b84218350be548a42bdfdb056fba9e3"
+}

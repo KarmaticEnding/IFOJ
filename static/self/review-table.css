@@ -1,0 +1,21 @@
+body:has(#review-editor) .ui.main.container { width:calc(100% - 240px)!important; max-width:1400px!important; margin-left:220px!important; margin-right:20px!important; }
+#review-save-panel { position:fixed; left:10px; top:69px; width:200px; z-index:10; }
+#review-status { font-size:12px; border:1px solid #ddd; border-radius:3px; padding:8px; margin-top:15px; white-space:pre-wrap; overflow-wrap:anywhere; }
+#review-editor { padding-bottom:20px; }
+#review-editor table { table-layout:fixed; }
+#review-editor td { overflow-wrap:anywhere; }
+#review-editor .normal.items table { table-layout:auto; }
+#review-editor .normal.item { font-size:12px; white-space:nowrap; cursor:pointer; }
+#review-editor .normal.item a { padding:10px 6px; }
+#review-editor textarea { resize:vertical; }
+#review-editor .subtask.items td { padding:0; }
+#review-editor .subtask.items input,#review-editor .guess_score { padding:0; }
+#review-editor input[type=number] { -moz-appearance:textfield; appearance:textfield; }
+#review-editor input[type=number]::-webkit-inner-spin-button,#review-editor input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+#review-editor .rethink,#review-editor .other { min-height:190px; }
+.review-remove { border:0; background:transparent; padding:0; cursor:pointer; color:#333; }
+#review-editor [role=button] { cursor:pointer; }
+#review-editor [role=button]:focus-visible { outline:2px solid #2185d0; }
+.modal.mistakes .content { max-height:65vh; overflow:auto; }
+.modal.mistakes .field { font-size:12px; margin:8px 0; }
+.modal.mistakes table { table-layout:fixed; }

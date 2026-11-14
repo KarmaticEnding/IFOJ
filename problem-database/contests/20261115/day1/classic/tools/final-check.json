@@ -1,0 +1,26 @@
+{
+  "score": 100,
+  "formal_points": 25,
+  "points_each": 4,
+  "tier_scores": [
+    12,
+    8,
+    4,
+    8,
+    16,
+    16,
+    24,
+    12
+  ],
+  "public_samples": 11,
+  "max_formal_seconds": 1.45,
+  "max_sample_seconds": 2.41,
+  "max_generator_peak_kib": 95884,
+  "all_formal_and_sample_spj_messages_ok": true,
+  "all_input_answer_hashes_checked": true,
+  "standard_and_checkers_match_pre_generation_verification": true,
+  "other_problem_configurations_unchanged": true,
+  "time_limit_seconds": 5.0,
+  "memory_limit": "512 MiB",
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261115/.backups/t4-before-classic-20261113-194020"
+}

@@ -58,6 +58,10 @@
             syzoj.utils.makeUrl(['contest', contest.id, 'submissions']); %>
           <a class="ui small positive button" href="<%= submissionsUrl %>">提交记录</a>
           <a class="ui small button pink" id="contest-download-package" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'download', 'zip']) %>" download="contest-<%= contest.id %>.zip">下载包</a>
+          <% if (user && contest.ended) { %>
+            <a class="ui small teal button" id="write-review-table" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'review_table', user.id, 'edit']) %>">写复盘表</a>
+            <a class="ui small purple button" id="view-review-tables" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'review_table']) %>">查看复盘表</a>
+          <% } %>
           <% if (isSupervisior) { %>
             <a class="ui small button" href="<%= syzoj.utils.makeUrl(['contest', contest.id, 'edit']) %>">编辑比赛</a>
           <% } %>

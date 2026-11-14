@@ -1,0 +1,65 @@
+version: 2
+folder: problem
+name: product
+title:
+  zh-cn: 前缀乘积
+type: program
+time limit: 1.0
+memory limit: 256 MiB
+file io: true
+partial score: false
+compile:
+  cpp: -O2 -std=c++14
+args:
+  n: 1000000
+  max_b: 1000000000000000000
+  mod: 100000007
+pre: []
+samples:
+- cases: [1, 2, 3, 4, 5, 6, 7, 8]
+users:
+  GPT:
+    std:
+      path: GPT/product.cpp
+      expected: == 100
+data:
+- cases: [1]
+  args: {n: 6, max_b: 9}
+- cases: [2]
+  args: {n: 6, max_b: 9}
+- cases: [3]
+  args: {n: 2000, max_b: 20}
+- cases: [4]
+  args: {n: 2000, max_b: 20}
+- cases: [5]
+  args: {n: 2000, max_b: 20}
+- cases: [6]
+  args: {n: 2000, max_b: 20}
+- cases: [7]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [8]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [9]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [10]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [11]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [12]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [13]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [14]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [15]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [16]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [17]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [18]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [19]
+  args: {n: 1000000, max_b: 1000000000000000000}
+- cases: [20]
+  args: {n: 1000000, max_b: 1000000000000000000}

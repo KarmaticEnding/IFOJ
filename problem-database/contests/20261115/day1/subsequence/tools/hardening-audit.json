@@ -1,0 +1,195 @@
+{
+  "cases": {
+    "1": {
+      "expected": 27,
+      "collapsed_state": 25,
+      "binary_only": 20,
+      "greedy_left": 27,
+      "greedy_right": 27,
+      "wrong_count_adjacent_only_upper_bound": 11
+    },
+    "2": {
+      "expected": 34,
+      "collapsed_state": 23,
+      "binary_only": 20,
+      "greedy_left": 34,
+      "greedy_right": 34,
+      "wrong_count_adjacent_only_upper_bound": 11
+    },
+    "3": {
+      "expected": 2370,
+      "collapsed_state": 2370,
+      "binary_only": 2369,
+      "greedy_left": 2370,
+      "greedy_right": 2370,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "4": {
+      "expected": 1881,
+      "collapsed_state": 1881,
+      "binary_only": 1881,
+      "greedy_left": 1881,
+      "greedy_right": 1881,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "5": {
+      "expected": 2146,
+      "collapsed_state": 2132,
+      "binary_only": 2145,
+      "greedy_left": 2146,
+      "greedy_right": 2146,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "6": {
+      "expected": 2618,
+      "collapsed_state": 2618,
+      "binary_only": 2617,
+      "greedy_left": 2618,
+      "greedy_right": 2618,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "7": {
+      "expected": 2400,
+      "collapsed_state": 2400,
+      "binary_only": 2400,
+      "greedy_left": 2400,
+      "greedy_right": 2400,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "8": {
+      "expected": 7140,
+      "collapsed_state": 7140,
+      "wrong_equal_char_q_squared": 14400,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "9": {
+      "expected": 11935,
+      "collapsed_state": 11935,
+      "wrong_equal_char_q_squared": 24025,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "10": {
+      "expected": 5100,
+      "collapsed_state": 4537,
+      "binary_only": 5100,
+      "greedy_left": 5100,
+      "greedy_right": 5100,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "11": {
+      "expected": 7961,
+      "collapsed_state": 6179,
+      "binary_only": 7961,
+      "greedy_left": 7961,
+      "greedy_right": 7961,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "12": {
+      "expected": 8775,
+      "collapsed_state": 6700,
+      "binary_only": 8775,
+      "greedy_left": 8775,
+      "greedy_right": 8775,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "13": {
+      "expected": 8517,
+      "collapsed_state": 5735,
+      "binary_only": 8517,
+      "greedy_left": 8517,
+      "greedy_right": 8517,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "14": {
+      "expected": 5475,
+      "collapsed_state": 4423,
+      "binary_only": 4675,
+      "greedy_left": 5294,
+      "greedy_right": 5275,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "15": {
+      "expected": 9605,
+      "collapsed_state": 4495,
+      "binary_only": 4160,
+      "greedy_left": 9603,
+      "greedy_right": 9603,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "16": {
+      "expected": 9104,
+      "collapsed_state": 5713,
+      "binary_only": 5625,
+      "greedy_left": 9103,
+      "greedy_right": 9103,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "17": {
+      "expected": 4400,
+      "collapsed_state": 3029,
+      "binary_only": 3275,
+      "greedy_left": 4400,
+      "greedy_right": 4400,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "18": {
+      "expected": 5042,
+      "collapsed_state": 5012,
+      "binary_only": 4990,
+      "greedy_left": 5042,
+      "greedy_right": 5042,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "19": {
+      "expected": 6955,
+      "collapsed_state": 3644,
+      "binary_only": 4711,
+      "greedy_left": 6955,
+      "greedy_right": 6955,
+      "wrong_count_adjacent_only_upper_bound": 199
+    },
+    "20": {
+      "expected": 9998,
+      "collapsed_state": 3432,
+      "binary_only": 2601,
+      "greedy_left": 9986,
+      "greedy_right": 9986,
+      "wrong_count_adjacent_only_upper_bound": 199
+    }
+  },
+  "failed_full_cases": {
+    "binary_only": [
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "greedy_left": [
+      "14",
+      "15",
+      "16",
+      "20"
+    ],
+    "greedy_right": [
+      "14",
+      "15",
+      "16",
+      "20"
+    ],
+    "collapsed_state": [
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ]
+  },
+  "general_cases_have_third_characters": true,
+  "general_cases_budget_below_saturation": true,
+  "formal_n_at_tier_maximum": true
+}

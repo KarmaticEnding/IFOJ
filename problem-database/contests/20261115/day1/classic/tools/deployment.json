@@ -1,0 +1,14 @@
+{
+  "backup": "/home/administrator/IFOJ/problem-database/contests/20261115/.backups/t4-before-classic-20261113-194020",
+  "preserved_conf_sha256": {
+    "product": "b576143ff00f3732ffe909f69513d702ca7e9865949e1bc0841a050edab1f0be",
+    "t2": "6bd5e2fc5467d175951c3dd213997a679a0dbd712bdf75e687b441e8571f43e5",
+    "span": "5ae37c5538472c209232da320525d91ebfb523dc70f100bdc419da6b8612291a"
+  },
+  "order": [
+    "product",
+    "t2",
+    "span",
+    "classic"
+  ]
+}

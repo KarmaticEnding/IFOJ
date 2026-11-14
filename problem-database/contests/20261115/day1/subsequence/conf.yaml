@@ -1,0 +1,63 @@
+version: 2
+folder: problem
+name: subsequence
+title:
+  zh-cn: 子序列
+type: program
+time limit: 1.0
+memory limit: 256 MiB
+file io: true
+partial score: false
+compile:
+  cpp: -O2 -std=c++14
+args:
+  n: 200
+  k: 200
+samples:
+- cases: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+users:
+  GPT:
+    std:
+      path: GPT/subsequence.cpp
+      expected: == 100
+data:
+- cases: [1]
+  args: {n: 12, k: 12}
+- cases: [2]
+  args: {n: 12, k: 12}
+- cases: [3]
+  args: {n: 200, k: 1}
+- cases: [4]
+  args: {n: 200, k: 1}
+- cases: [5]
+  args: {n: 200, k: 2}
+- cases: [6]
+  args: {n: 200, k: 2}
+- cases: [7]
+  args: {n: 200, k: 2}
+- cases: [8]
+  args: {n: 200, k: 200}
+- cases: [9]
+  args: {n: 200, k: 200}
+- cases: [10]
+  args: {n: 200, k: 200}
+- cases: [11]
+  args: {n: 200, k: 200}
+- cases: [12]
+  args: {n: 200, k: 200}
+- cases: [13]
+  args: {n: 200, k: 200}
+- cases: [14]
+  args: {n: 200, k: 200}
+- cases: [15]
+  args: {n: 200, k: 200}
+- cases: [16]
+  args: {n: 200, k: 200}
+- cases: [17]
+  args: {n: 200, k: 200}
+- cases: [18]
+  args: {n: 200, k: 200}
+- cases: [19]
+  args: {n: 200, k: 200}
+- cases: [20]
+  args: {n: 200, k: 200}

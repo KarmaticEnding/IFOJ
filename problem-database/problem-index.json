@@ -1,15 +1,27 @@
 {
   "1": "aplusb",
-  "4": {
+  "2": {
     "path": "contests/20261107/day1/vector"
   },
-  "5": {
+  "3": {
     "path": "contests/20261107/day1/sub"
   },
-  "6": {
+  "4": {
     "path": "contests/20261107/day1/letter"
   },
-  "7": {
+  "5": {
     "path": "contests/20261107/day1/mex"
+  },
+  "6": {
+    "path": "contests/20261115/day1/product"
+  },
+  "7": {
+    "path": "contests/20261115/day1/subsequence"
+  },
+  "8": {
+    "path": "contests/20261115/day1/span"
+  },
+  "9": {
+    "path": "contests/20261115/day1/classic"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "python_exact_and_fixed_cases": 4486,
+  "binary_special_cases": 4092,
+  "total_dp_comparisons": 8578,
+  "sanitized_cases": 8578,
+  "three_way_cli_cases": 20,
+  "file_io": true,
+  "std_sha256": "0682a96f90c3664a409eb0cc4c9722a34901212bcb2fdc70bc7e6119389d7579",
+  "oracle_sha256": "d3ea49134e8db6ba2253bc24f3a543a83593435d48e5988f1774b05842ab0315",
+  "brute_sha256": "74907c24a9e9dbbb85900eefdf01dcd4daf986b6483efd5b03d1697963bb8966"
+}

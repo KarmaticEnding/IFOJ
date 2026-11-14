@@ -1,0 +1,35 @@
+<% this.title=target.username+' - 复盘表'; %>
+<% include header %>
+<style>
+.review-reading table { table-layout:fixed; }
+.review-reading td { overflow-wrap:anywhere; }
+.review-reading .review-text { white-space:pre-wrap; vertical-align:top; }
+.review-reading .check-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px; }
+.review-reading .check-grid > span { white-space:nowrap; }
+.review-reading .subtasks { table-layout:auto; }
+.review-reading .subtasks td { padding:4px; }
+</style>
+<div class="review-reading">
+ <h2><%= target.username %> 的复盘表</h2>
+ <p><a href="<%= syzoj.utils.makeUrl(['contest',contest.id]) %>"><%= contest.title %></a> · 保存时间：<%= new Date(savedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai'}) %></p>
+ <div class="ui buttons" style="margin-bottom:16px;">
+  <% if(canEdit){ %><a class="ui teal button" href="<%= syzoj.utils.makeUrl(['contest',contest.id,'review_table',target.id,'edit']) %>">编辑复盘表</a><% } %>
+ </div>
+ <table class="ui small compact celled table">
+  <thead><tr><th style="width:11%">开始时间</th><th style="width:44.5%">计划</th><th>完成情况</th></tr></thead>
+  <tbody><% for(const row of review.timeline){ %><tr><td><%= row.time %></td><td class="review-text"><%= row.plan %></td><td class="review-text"><%= row.achieve %></td></tr><% } %>
+  <% if(!review.timeline.length){ %><tr><td colspan="3">未填写时间计划。</td></tr><% } %></tbody>
+ </table>
+ <table class="ui small compact celled table">
+  <thead><tr><th style="width:9%">题目</th><th style="width:17%">常规检查1</th><th style="width:9%">检查2</th><th style="width:5%">估分</th><th style="width:27%">部分分计划和完成情况</th><th style="width:20%">数据、探索和反思</th><th style="width:13%">其他情况</th></tr></thead>
+  <tbody><% problems.forEach((problem,index)=>{ if(!problem)return; const data=review.problems[problem.id]||{}; %><tr>
+   <td><a href="<%= syzoj.utils.makeUrl(['contest',contest.id,'problem',index+1]) %>"><%= String.fromCharCode(65+index) %>. <%= syzoj.utils.removeTitleTag(problem.title) %></a></td>
+   <td><div class="check-grid"><% for(const item of reviewOptions.normal_items){ const state=reviewOptions.normal_icons.find(x=>x.name===(data.normal||{})[item.name]); %><span title="<%= item.tooltip %>：<%= state?state.tooltip:'未填写' %>"><i class="<%= state?state.icon:'question circle' %> icon"></i><%= item.title %></span><% } %></div></td>
+   <td><% if(!(data.mistakes||[]).length){ %>无<% }else{for(const code of data.mistakes){ %><div title="<%= (reviewOptions.mistakes[code[0]]||{})[code.slice(1)]||'' %>"><%= code %></div><% }} %></td>
+   <td><%= data.guess_score===undefined||data.guess_score===''?'未填写':data.guess_score %></td>
+   <td><% if((data.subtasks||[]).length){ %><table class="ui very basic small compact table subtasks"><thead><tr><th>实际</th><th>预期</th><th>满分</th><th>描述</th></tr></thead><tbody><% for(const part of data.subtasks){ %><tr><td><%= part.actual %></td><td><%= part.expected %></td><td><%= part.total %></td><td class="review-text"><%= part.description %></td></tr><% } %></tbody></table><% }else{ %>未填写<% } %></td>
+   <td class="review-text"><%= data.rethink||'' %></td><td class="review-text"><%= data.other||'' %></td>
+  </tr><% }); %></tbody>
+ </table>
+</div>
+<% include footer %>

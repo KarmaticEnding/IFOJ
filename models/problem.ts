@@ -137,7 +137,8 @@ export default class Problem extends Model {
     if (this.is_public) return true;
     if (!user) return false;
     if (await user.hasPrivilege('manage_problem')) return true;
-    return this.user_id === user.id;
+    if (this.user_id === user.id) return true;
+    return syzoj.lib('contest_problem_access').hasProblem(this.id, user);
   }
 
   async isAllowedManageBy(user) {

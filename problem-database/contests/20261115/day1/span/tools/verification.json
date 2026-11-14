@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "array_cases": 544,
+  "query_cases": 47772,
+  "sanitized_arrays": 40,
+  "file_io": true,
+  "std_sha256": "6fc00e6430922acdad81a9ad14694333dc6b7baa35ae617a74cff3a9a03fbc1a",
+  "oracle_sha256": "ff8af73fd1877cbf394611405592c146bf8215e61a8766c3958c1081a3963a73"
+}

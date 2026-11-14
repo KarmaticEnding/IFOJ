@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "small_cases": 438,
+  "large_boundary_cases": 10,
+  "spj_verdicts": 168,
+  "tuack_adapter": true,
+  "file_io": true,
+  "std_sha256": "a95b4e3bd716878ac9b2bd6983d34908f77c7c42e532ba41200d6867ee915c6c",
+  "official_sha256": "0375232fe580b3040d88c7fa8a86eff68c03d2fbb17edf58bf89c30670ba8149",
+  "public_sha256": "cbd91931a0711b03347f4d799881b1754e6004626d22757e0e2e757ca6bbb5c2",
+  "testlib_sha256": "743822d8120213a3482f4a6e8b9846219b84218350be548a42bdfdb056fba9e3"
+}

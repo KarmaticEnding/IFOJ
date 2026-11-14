@@ -1,0 +1,75 @@
+version: 2
+folder: problem
+name: classic
+title:
+  zh-cn: 经典问题
+type: program
+time limit: 5.0
+memory limit: 512 MiB
+file io: true
+partial score: false
+compile:
+  cpp: -O2 -std=c++14
+args:
+  n: 100000
+  m: 200000
+  X: 100000
+  mod: 1000000007
+samples:
+- cases: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+users:
+  GPT:
+    std:
+      path: GPT/classic.cpp
+      expected: == 100
+data:
+- cases: [1]
+  args: {n: 100000, m: 200000, X: 40}
+- cases: [2]
+  args: {n: 100000, m: 200000, X: 40}
+- cases: [3]
+  args: {n: 100000, m: 200000, X: 40}
+- cases: [4]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [5]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [6]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [7]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [8]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [9]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [10]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [11]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [12]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [13]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [14]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [15]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [16]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [17]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [18]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [19]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [20]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [21]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [22]
+  args: {n: 5000, m: 10000, X: 100000}
+- cases: [23]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [24]
+  args: {n: 100000, m: 200000, X: 100000}
+- cases: [25]
+  args: {n: 100000, m: 200000, X: 100000}

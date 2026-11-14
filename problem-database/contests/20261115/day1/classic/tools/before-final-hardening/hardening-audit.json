@@ -1,0 +1,146 @@
+{
+  "log": {
+    "17": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "18": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "19": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "20": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "21": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "22": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "23": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "24": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "25": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    }
+  },
+  "mod": {
+    "17": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "18": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "19": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "20": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "21": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "22": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "23": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "24": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "25": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    }
+  },
+  "mst": {
+    "17": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "18": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "19": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "20": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "21": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "22": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    },
+    "23": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "24": {
+      "accepted": true,
+      "message": "ok exact shortest path verified"
+    },
+    "25": {
+      "accepted": false,
+      "message": "wrong answer wrong distance residue"
+    }
+  },
+  "per_bit_carry": {
+    "case": 24,
+    "reused_version_ones": 49999,
+    "independent_extensions": 50000,
+    "bit_flips_lower_bound": 2499950000,
+    "description": "Each extension adds 2 to the same distance 2^50000-2; deleting the final 49999 one-bits cannot be amortized over versions."
+  },
+  "cpp_int": {
+    "case": 25,
+    "seconds": 9.45,
+    "peak_kib": 1240488,
+    "accepted": true,
+    "message": "ok exact shortest path verified"
+  },
+  "formal": {
+    "points": 25,
+    "points_each": 4,
+    "tiers": [
+      12,
+      8,
+      4,
+      8,
+      16,
+      16,
+      24,
+      12
+    ],
+    "large_samples": 8,
+    "inline_samples": 3
+  }
+}

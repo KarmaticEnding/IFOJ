@@ -9,6 +9,7 @@ const fs = require('fs-extra');
 const jwt = require('jsonwebtoken');
 const problemSource = require('../libs/problem_source');
 const relatedFiles = require('../libs/related_files');
+const contestProblemAccess = require('../libs/contest_problem_access');
 
 function serverOnlyTestdata(req, res) {
   const message = '测试数据仅允许通过服务器文件管理。';
@@ -44,11 +45,14 @@ app.get('/problems', async (req, res) => {
       throw new ErrorMessage('错误的排序参数。');
     }
 
+    const unlockedIds = await contestProblemAccess.getProblemIds(res.locals.user);
     let query = Problem.createQueryBuilder();
     if (!res.locals.user || !await res.locals.user.hasPrivilege('manage_problem')) {
       if (res.locals.user) {
-        query.where('is_public = 1')
-             .orWhere('user_id = :user_id', { user_id: res.locals.user.id });
+        query.where(new TypeORM.Brackets(qb => {
+          qb.where('is_public = 1').orWhere('user_id = :user_id', {user_id:res.locals.user.id});
+          if(unlockedIds.length)qb.orWhere('id IN (:...unlockedIds)', {unlockedIds});
+        }));
       } else {
         query.where('is_public = 1');
       }
@@ -65,6 +69,7 @@ app.get('/problems', async (req, res) => {
 
     await problems.forEachAsync(async problem => {
       problem.allowedEdit = await problem.isAllowedEditBy(res.locals.user);
+      problem.allowedUse = await problem.isAllowedUseBy(res.locals.user);
       problem.judge_state = await problem.getJudgeState(res.locals.user, true);
       problem.tags = await problem.getTags();
     });
@@ -93,12 +98,14 @@ app.get('/problems/search', async (req, res) => {
       throw new ErrorMessage('错误的排序参数。');
     }
 
+    const unlockedIds = await contestProblemAccess.getProblemIds(res.locals.user);
     let query = Problem.createQueryBuilder();
     if (!res.locals.user || !await res.locals.user.hasPrivilege('manage_problem')) {
       if (res.locals.user) {
         query.where(new TypeORM.Brackets(qb => {
              qb.where('is_public = 1')
-                 .orWhere('user_id = :user_id', { user_id: res.locals.user.id })
+                 .orWhere('user_id = :user_id', { user_id: res.locals.user.id });
+               if(unlockedIds.length)qb.orWhere('id IN (:...unlockedIds)', {unlockedIds});
              }))
              .andWhere(new TypeORM.Brackets(qb => {
                qb.where('title LIKE :title', { title: `%${req.query.keyword}%` })
@@ -128,6 +135,7 @@ app.get('/problems/search', async (req, res) => {
 
     await problems.forEachAsync(async problem => {
       problem.allowedEdit = await problem.isAllowedEditBy(res.locals.user);
+      problem.allowedUse = await problem.isAllowedUseBy(res.locals.user);
       problem.judge_state = await problem.getJudgeState(res.locals.user, true);
       problem.tags = await problem.getTags();
     });
@@ -181,7 +189,9 @@ app.get('/problems/tag/:tagIDs', async (req, res) => {
 
     if (!res.locals.user || !await res.locals.user.hasPrivilege('manage_problem')) {
       if (res.locals.user) {
-        sql += 'AND (`problem`.`is_public` = 1 OR `problem`.`user_id` = ' + res.locals.user.id + ')';
+        const unlockedIds = await contestProblemAccess.getProblemIds(res.locals.user);
+        sql += 'AND (`problem`.`is_public` = 1 OR `problem`.`user_id` = ' + res.locals.user.id +
+          (unlockedIds.length ? ' OR `problem`.`id` IN (' + unlockedIds.join(',') + ')' : '') + ')';
       } else {
         sql += 'AND (`problem`.`is_public` = 1)';
       }
@@ -195,6 +205,7 @@ app.get('/problems/tag/:tagIDs', async (req, res) => {
       problem = await Problem.findById(problem.id);
 
       problem.allowedEdit = await problem.isAllowedEditBy(res.locals.user);
+      problem.allowedUse = await problem.isAllowedUseBy(res.locals.user);
       problem.judge_state = await problem.getJudgeState(res.locals.user, true);
       problem.tags = await problem.getTags();
 
@@ -240,7 +251,7 @@ app.get(['/problem/:id', '/problem/:id/markdown/html', '/problem/:id/download/re
       });
     }
 
-    if (problem.is_public || problem.allowedEdit) {
+    if (await problem.isAllowedUseBy(res.locals.user)) {
       await syzoj.utils.markdown(problem, ['description', 'input_format', 'output_format', 'example', 'limit_and_hint']);
     } else {
       throw new ErrorMessage('您没有权限进行此操作。');
@@ -325,6 +336,7 @@ app.get('/problem/:id/edit', async (req, res) => {
     } else {
       if (!await problem.isAllowedUseBy(res.locals.user)) throw new ErrorMessage('您没有权限进行此操作。');
       problem.allowedEdit = await problem.isAllowedEditBy(res.locals.user);
+      problem.allowedUse = await problem.isAllowedUseBy(res.locals.user);
       problem.tags = await problem.getTags();
     }
 
