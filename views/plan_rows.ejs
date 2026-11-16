@@ -1,0 +1,6 @@
+<% for(const entry of entries){ const data=records[entry.kind+':'+entry.date]||{}; %>
+<tr class="plan-row <%= entry.kind==='week'?'plan-week':'' %>" data-date="<%= entry.date %>" data-kind="<%= entry.kind %>" data-version="<%= data.version||0 %>">
+ <td class="plan-date"><span><%= entry.label %></span><button type="button" class="ui mini basic button plan-toggle" aria-expanded="false" hidden>展开</button></td>
+ <% for(const key of ['description','completion','comment']){ %><td class="<%= canEdit?'plan-item':'' %>"><div class="plan-cell"><div class="plan-text" data-field="<%= key %>"><%= data[key]||'' %></div></div></td><% } %>
+</tr>
+<% } %>
