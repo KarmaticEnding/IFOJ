@@ -1,7 +1,7 @@
 <% this.title='个人计划'; this.active='plan'; %>
 <% include header %>
-<link rel="stylesheet" href="/self/plan.css?v=2">
-<div id="plan-page" data-user="<%= target.id %>" data-csrf="<%= csrf %>" data-editable="<%= canEdit?'1':'0' %>" data-start="<%= start %>" data-end="<%= end %>">
+<link rel="stylesheet" href="/self/plan.css?v=3">
+<div id="plan-page" data-user="<%= target.id %>" data-csrf="<%= csrf %>" data-editable="<%= canEdit?'1':'0' %>" data-admin="<%= user&&user.is_admin?'1':'0' %>" data-server-time="<%= Date.now() %>" data-start="<%= start %>" data-end="<%= end %>">
  <table class="ui celled small very compact selectable table plan-table" aria-label="<%= target.username %>的个人计划">
   <colgroup><col style="width:11.43%"><col style="width:34.285%"><col style="width:34.285%"><col style="width:20%"></colgroup>
   <thead><tr class="center aligned"><th>日期</th><th>计划描述</th><th>完成情况</th><th>调整、补充和评语</th></tr></thead>
@@ -14,12 +14,12 @@
 <div class="ui modal plan" id="plan-editor">
  <div class="header">编辑计划</div>
  <div class="scrolling content"><div id="plan-edit-date"></div><form class="ui form" id="plan-form">
-  <div class="field"><label for="plan-description">计划描述</label><textarea id="plan-description" name="description" rows="5" spellcheck="false"></textarea></div>
+  <div class="field"><label for="plan-description">计划描述</label><textarea id="plan-description" name="description" rows="5" spellcheck="false"></textarea><div id="plan-description-lock" hidden>当天及以前的计划描述仅管理员可修改。</div></div>
   <div class="field"><label for="plan-completion">完成情况</label><textarea id="plan-completion" name="completion" rows="5" spellcheck="false"></textarea></div>
   <div class="field"><label for="plan-comment">调整、补充和评语</label><textarea id="plan-comment" name="comment" rows="5" spellcheck="false"></textarea></div>
  </form><div id="plan-save-status" role="status" aria-live="polite"></div></div>
  <div class="actions"><button type="button" class="ui positive button">确定</button><button type="button" class="ui cancel button">取消</button></div>
 </div>
 <% } %>
-<script src="/self/plan.js?v=2"></script>
+<script src="/self/plan.js?v=3"></script>
 <% include footer %>

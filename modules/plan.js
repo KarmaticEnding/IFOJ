@@ -50,6 +50,14 @@ app.post('/schedule/:uid/entry',async(req,res)=>{
   if(!req.get('X-Plan-CSRF')||req.get('X-Plan-CSRF')!==req.session.planToken)fail('页面已过期，请刷新后重试。',403);
   const data=validate(req.body),version=req.body.version+1,saved_at=new Date().toISOString();
   const key={user_id:target.id,date:req.body.date,kind:req.body.kind};
+  const descriptionLocked=!res.locals.user.is_admin&&key.date<=calendar.today();
+  if(descriptionLocked){
+   const existing=await Entry.findOne(key);
+   if(data.description!==(existing?existing.description:''))fail('当天及以前的计划描述仅管理员可修改。',403);
+   // Preserve the description on updates; optimistic versions also protect
+   // against an administrator changing it while this request is being saved.
+   if(req.body.version>0)delete data.description;
+  }
   if(req.body.version===0){
    try{await Entry.insert({...key,...data,version,saved_at});}
    catch(e){if(e.code==='ER_DUP_ENTRY')fail('此计划已被其他窗口修改，请保留当前内容，刷新后合并。',409);throw e;}
